@@ -6,7 +6,9 @@ package model.Categorymodel;
 
 import Database.Dbcontext;
 import java.sql.Connection;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.logging.Level;
@@ -78,5 +80,18 @@ public class CategoryDao {
                 }
 
         
+    }
+    
+    public void InsertCategory(Category Categorys) {        
+        try {   
+            Dbcontext.getConnection();            
+            String sql = "INSERT INTO category(CategoryName) VALUES(?)";
+            PreparedStatement  statement = (PreparedStatement) Dbcontext.getConnection().prepareStatement(sql);           
+            statement.setString(1, Categorys.getCategoryName());
+            statement.executeUpdate();                        
+            System.out.println("insert data successfully");
+        } catch(SQLException ex) {
+            System.err.println("Error in SQL: "+ex.toString());
+        }                
     }
 }

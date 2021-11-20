@@ -1,11 +1,10 @@
 <%-- 
-    Document   : InsertBrand
-    Created on : Nov 15, 2021, 7:52:48 PM
+    Document   : InsertCategory
+    Created on : Nov 20, 2021, 9:30:21 AM
     Author     : hieun
 --%>
 
-<%@page import="model.Brandmodel.Brand"%>
-<%@page import="model.Brandmodel.BrandDao"%>
+<%@page import="model.Categorymodel.*"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html lang="en">
@@ -131,22 +130,21 @@
                     </div>
                     <div class="row">
                         <div class="col-lg-12">
-                            <form action="InsertBrand.jsp" method="POST">
+                            <form action="InsertCategory.jsp" method="POST">
                                 <div class="form-group">
-                                    <label for="brandName">Brand Name</label>
-                                    <input type="text" class="form-control" name="brandName" placeholder="Brand Name">
+                                    <label for="CategoryName">Category Name</label>
+                                    <input type="text" class="form-control" name="CategoryName" placeholder="Category Name">
                                     <%
-                                        BrandDao db = new BrandDao();
+                                        CategoryDao dbs = new CategoryDao();
                                         int ktbr=0;
                                         if(request.getParameter("add")!=null){
-                                            out.print(request.getParameter("brandName"));
-                                            if(request.getParameter("brandName").equals("")){
+                                            out.print(request.getParameter("CategoryName"));
+                                            if(request.getParameter("CategoryName").equals("")){
                                                 ktbr=1;
                                             }else{
-                                                String brandName = request.getParameter("brandName");
-                                                String logo = request.getParameter("logo");
-                                                db.InsertBrand(new Brand(0,brandName, logo)); 
-                                                response.sendRedirect("../../Admin/Table/TableBrand.jsp?Page=1");
+                                                String CategoryName = request.getParameter("CategoryName");
+                                                dbs.InsertCategory(new Category(0,CategoryName)); 
+                                                response.sendRedirect("../../Admin/Table/TableCategory.jsp?Page=1");
                                             }
                                         }
                                     %>
@@ -160,10 +158,7 @@
                                     
                                     </small>
                                 </div>
-                                <div class="form-group">
-                                    <label for="logo">Logo</label>
-                                    <input type="file"  name="logo">
-                                </div>                               
+                                                             
                                 <input class="btn btn-primary" type="submit" name="add" value="Add"/>
                                
                             </form>

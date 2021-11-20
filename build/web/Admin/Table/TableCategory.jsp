@@ -146,9 +146,9 @@
                         <div class="col-lg-12">
                             <div class="panel panel-default">
                                 <div class="panel-heading">
-                                    <a class="btn icon-btn btn-success" href="../../Admin/Insert/InsertBrand.jsp">
+                                    <a class="btn icon-btn btn-success" href="../../Admin/Insert/InsertCategory.jsp">
                                         <span class="glyphicon btn-glyphicon glyphicon-plus img-circle text-success"></span>
-                                        New Brand
+                                        New Category
                                     </a>
                                 </div>
                                 <!-- /.panel-heading -->

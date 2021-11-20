@@ -102,10 +102,13 @@
                                 <a href="#"><i class="fa fa-table"></i> Table<span class="fa arrow"></span></a>
                                 <ul class="nav nav-second-level">
                                     <li>
-                                        <a href="../../Admin/Table/TableProduct.jsp">Table Product</a>
+                                        <a href="../../Admin/Table/TableProduct.jsp?Page=1">Table Product</a>
                                     </li>
                                     <li>
                                         <a href="../../Admin/Table/TableBrand.jsp?Page=1">Table Brand</a>
+                                    </li>
+                                    <li>
+                                        <a href="../../Admin/Table/TableCategory.jsp?Page=1">Table Brand</a>
                                     </li>
                                 </ul>
                                 <!-- /.nav-second-level -->
