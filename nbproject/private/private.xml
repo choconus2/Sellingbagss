@@ -3,30 +3,31 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/bt_java/sellingbags/src/java/model/Categorymodel/CategoryDao.java</file>
             <file>file:/C:/bt_java/sellingbags/web/WEB-INF/applicationContext.xml</file>
-            <file>file:/C:/bt_java/sellingbags/web/Admin/HomeAdmin.jsp</file>
-            <file>file:/C:/bt_java/sellingbags/web/WEB-INF/jsp/index.jsp</file>
-            <file>file:/C:/bt_java/sellingbags/src/java/model/Adminmodel/AdminDao.java</file>
             <file>file:/C:/bt_java/sellingbags/src/java/model/Brandmodel/BrandDao.java</file>
-            <file>file:/C:/bt_java/sellingbags/web/Admin/Insert/InsertBrand.jsp</file>
-            <file>file:/C:/bt_java/sellingbags/src/java/model/ImgProductmodel/Image.java</file>
-            <file>file:/C:/bt_java/sellingbags/web/Admin/LoginAdmin.jsp</file>
-            <file>file:/C:/bt_java/sellingbags/src/java/Database/Dbcontext.java</file>
-            <file>file:/C:/bt_java/sellingbags/src/java/model/Productmodel/ProductDao.java</file>
             <file>file:/C:/bt_java/sellingbags/src/java/model/Brandmodel/Brand.java</file>
             <file>file:/C:/bt_java/sellingbags/web/Admin/Insert/InsertProduct.jsp</file>
             <file>file:/C:/bt_java/sellingbags/web/Admin/Table/TableBrand.jsp</file>
             <file>file:/C:/bt_java/sellingbags/web/Admin/Table/TableCategory.jsp</file>
             <file>file:/C:/bt_java/sellingbags/src/java/model/Productmodel/Product.java</file>
+            <file>file:/C:/bt_java/sellingbags/web/Admin/Insert/InsertCategory.jsp</file>
             <file>file:/C:/bt_java/sellingbags/src/java/model/Categorymodel/Category.java</file>
-            <file>file:/C:/bt_java/sellingbags/web/redirect.jsp</file>
-            <file>file:/C:/bt_java/sellingbags/src/java/model/Adminmodel/Admin.java</file>
             <file>file:/C:/bt_java/sellingbags/web/Admin/Table/TableProduct.jsp</file>
-            <file>file:/C:/bt_java/sellingbags/web/WEB-INF/web.xml</file>
-            <file>file:/C:/bt_java/sellingbags/web/Admin/LogoutAdmin.jsp</file>
             <file>file:/C:/bt_java/sellingbags/src/java/model/ImgProductmodel/ImageDao.java</file>
             <file>file:/C:/bt_java/sellingbags/web/WEB-INF/dispatcher-servlet.xml</file>
+            <file>file:/C:/bt_java/sellingbags/src/java/model/Categorymodel/CategoryDao.java</file>
+            <file>file:/C:/bt_java/sellingbags/web/Admin/HomeAdmin.jsp</file>
+            <file>file:/C:/bt_java/sellingbags/web/WEB-INF/jsp/index.jsp</file>
+            <file>file:/C:/bt_java/sellingbags/src/java/model/Adminmodel/AdminDao.java</file>
+            <file>file:/C:/bt_java/sellingbags/web/Admin/Insert/InsertBrand.jsp</file>
+            <file>file:/C:/bt_java/sellingbags/src/java/model/ImgProductmodel/Image.java</file>
+            <file>file:/C:/bt_java/sellingbags/web/Admin/LoginAdmin.jsp</file>
+            <file>file:/C:/bt_java/sellingbags/src/java/Database/Dbcontext.java</file>
+            <file>file:/C:/bt_java/sellingbags/src/java/model/Productmodel/ProductDao.java</file>
+            <file>file:/C:/bt_java/sellingbags/web/redirect.jsp</file>
+            <file>file:/C:/bt_java/sellingbags/src/java/model/Adminmodel/Admin.java</file>
+            <file>file:/C:/bt_java/sellingbags/web/WEB-INF/web.xml</file>
+            <file>file:/C:/bt_java/sellingbags/web/Admin/LogoutAdmin.jsp</file>
         </group>
     </open-files>
 </project-private>
