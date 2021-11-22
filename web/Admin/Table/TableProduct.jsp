@@ -224,9 +224,9 @@
                                                                 for (int i = 1; i <= sotrang; i++) {
                                                                     if (i == Integer.parseInt(x)) {
                                                                         dem = i;
-                                                                        listpage += "<li class='paginate_button active'><a href='TableBrand.jsp?Page=" + i + "'>" + i + "</a></li>";
+                                                                        listpage += "<li class='paginate_button active'><a href='TableProduct.jsp?Page=" + i + "'>" + i + "</a></li>";
                                                                     } else {
-                                                                        listpage += "<li><a href='TableBrand.jsp?Page=" + i + "'>" + i + "</a></li>";
+                                                                        listpage += "<li><a href='TableProduct.jsp?Page=" + i + "'>" + i + "</a></li>";
                                                                     }
 
                                                                 }
