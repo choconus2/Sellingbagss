@@ -233,12 +233,12 @@
                                                                 int dem2 = dem + 1;
                                                                 int dem3 = dem - 1;
                                                                 if (dem > 1) {
-                                                                    out.print("<li ><a href='TableBrand.jsp?Page=" + dem3 + "'>Previous</a></li>");
+                                                                    out.print("<li ><a href='TableProduct.jsp?Page=" + dem3 + "'>Previous</a></li>");
                                                                 }
 
                                                                 out.print(listpage);
                                                                 if (dem < sotrang) {
-                                                                    out.print("<li ><a href='TableBrand.jsp?Page=" + dem2 + "'>Next</a></li>");
+                                                                    out.print("<li ><a href='TableProduct.jsp?Page=" + dem2 + "'>Next</a></li>");
                                                                 }
 
                                                             %>
