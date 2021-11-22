@@ -185,7 +185,7 @@
                                                                 ImageDao im = new ImageDao();
                                                                 //out.println(db.sayHello());
                                                                 String x = request.getParameter("Page");
-                                                                ArrayList<Product> Products = db.GetProduct((Integer.parseInt(x) - 1) * 2);
+                                                                ArrayList<Product> Products = db.GetProduct((Integer.parseInt(x) - 1) * 6);
                                                                 for (Product br : Products) {
                                                                     out.print("<tr class='gradeX odd' role='row'>");
                                                                     out.print("<td>" + br.getProductName() + "</td>");
@@ -218,7 +218,7 @@
 
                                                                 ArrayList<Product> countbr = db.CountProduct();
                                                                 int tongso = countbr.size();
-                                                                double a = (double) tongso / 2;
+                                                                double a = (double) tongso / 6;
                                                                 int sotrang = (int) Math.ceil(a);
                                                                 String listpage = " ";
                                                                 for (int i = 1; i <= sotrang; i++) {

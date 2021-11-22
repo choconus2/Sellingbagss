@@ -31,7 +31,7 @@ public class ProductDao {
                     
                     Connection connection = Dbcontext.getConnection();
                     Statement stmt = connection.createStatement();
-                    ResultSet rs = stmt.executeQuery("SELECT * FROM product INNER JOIN Brand ON Product.Brandid = Brand.Brandid INNER JOIN category ON Product.Categoryid = category.Categoryid ORDER BY Productid DESC  LIMIT "+x+",2");) {
+                    ResultSet rs = stmt.executeQuery("SELECT * FROM product INNER JOIN Brand ON Product.Brandid = Brand.Brandid INNER JOIN category ON Product.Categoryid = category.Categoryid ORDER BY Productid DESC  LIMIT "+x+",6");) {
 
                 while (rs.next()) {
                     Integer Productid=rs.getInt("Productid");
