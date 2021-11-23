@@ -199,7 +199,7 @@
                                                                     out.print("<td>" + br.getDetail() + "</td>");
                                                                     out.print("<td>" + br.getBrandName()+ "</td>");
                                                                     out.print("<td>" + br.getCategoryName()+ "</td>");
-                                                                    out.print("<td><a href='deletebooks.jsp?BookId=" + br.getProductid()+ "'>Delete</a></td> ");
+                                                                    out.print("<td><a href='../Delete/DeleteProduct.jsp?Productid=" + br.getProductid()+ "'>Delete</a></td> ");
                                                                     out.print("</tr>");
                                                                 }
                                                             %>

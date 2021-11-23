@@ -184,7 +184,7 @@
                                                                     out.print("<tr class='gradeX odd' role='row'>");
                                                                     out.print("<td>" + br.getBrandName() + "</td>");
                                                                     out.print("<td>" + "<image style='width: 200px;height: 200px' src='../../img/LogoBrand/" + br.getLogo() + "' />" + "</td>");
-                                                                    out.print("<td><a href='deletebooks.jsp?BookId=" + br.getBrandid()+ "'>Delete</a></td> ");
+                                                                    out.print("<td><a href='../Delete/DeleteBrand.jsp?Brandid=" + br.getBrandid()+ "'>Delete</a></td> ");
                                                                     out.print("</tr>");
                                                                 }
                                                             %>

@@ -65,5 +65,29 @@ public class ImageDao {
         }                
     }
     
+    public void deleteImage(int Productid) {        
+        try {   
+            Dbcontext.getConnection();                       
+            String sql = "DELETE FROM image WHERE Productid = ?";
+            PreparedStatement  statement = (PreparedStatement) Dbcontext.getConnection().prepareStatement(sql);           
+            statement.setInt(1, Productid);            
+            statement.executeUpdate();                        
+            System.out.println("delete data successfully");
+        } catch(SQLException ex) {
+            System.err.println("Delete error: "+ex.toString());
+        }                
+    }
     
+    public void deleteImagebr(int Brandid) {        
+        try {   
+            Dbcontext.getConnection();                       
+            String sql = "DELETE image FROM image INNER JOIN product ON image.Productid = product.Productid WHERE product.Brandid = ?";
+            PreparedStatement  statement = (PreparedStatement) Dbcontext.getConnection().prepareStatement(sql);           
+            statement.setInt(1, Brandid);            
+            statement.executeUpdate();                        
+            System.out.println("delete data successfully");
+        } catch(SQLException ex) {
+            System.err.println("Delete error: "+ex.toString());
+        }                
+    }
 }

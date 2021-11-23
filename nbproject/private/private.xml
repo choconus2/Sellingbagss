@@ -3,7 +3,16 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/GitHub/Sellingbagss/web/Admin/Table/TableBrand.jsp</file>
+            <file>file:/C:/bt_java/sellingbags/Sellingbagss/web/Admin/LogoutAdmin.jsp</file>
+            <file>file:/C:/bt_java/sellingbags/Sellingbagss/nbproject/build-impl.xml</file>
+            <file>file:/C:/bt_java/sellingbags/Sellingbagss/web/Admin/Delete/DeleteBrand.jsp</file>
+            <file>file:/C:/bt_java/sellingbags/Sellingbagss/nbproject/build-impl.xml~</file>
+            <file>file:/C:/bt_java/sellingbags/Sellingbagss/web/Admin/Insert/InsertProduct.jsp</file>
+            <file>file:/C:/bt_java/sellingbags/Sellingbagss/src/java/model/Brandmodel/BrandDao.java</file>
+            <file>file:/C:/bt_java/sellingbags/Sellingbagss/web/Admin/Table/TableBrand.jsp</file>
+            <file>file:/C:/bt_java/sellingbags/Sellingbagss/web/Admin/Insert/InsertBrand.jsp</file>
+            <file>file:/C:/bt_java/sellingbags/Sellingbagss/web/Admin/Table/TableProduct.jsp</file>
+            <file>file:/C:/bt_java/sellingbags/Sellingbagss/src/java/model/Productmodel/ProductDao.java</file>
         </group>
     </open-files>
 </project-private>

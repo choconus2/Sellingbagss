@@ -82,6 +82,35 @@ public class BrandDao {
         
     }
     
+    public String NameBrand(int id){
+        
+        String namebr="";
+        try {
+            Class.forName("com.mysql.jdbc.Driver");
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(Dbcontext.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        try (
+                    
+                    Connection connection = Dbcontext.getConnection();
+                    Statement stmt = connection.createStatement();
+                    ResultSet rs = stmt.executeQuery("SELECT * FROM brand WHERE Brandid="+id);) {
+
+                while (rs.next()) {
+                    
+                    namebr=rs.getString("BrandName");
+                   
+                }           
+            } catch (Exception e) {
+               
+                System.err.println(e.getMessage());
+            } finally{
+                    return namebr;
+                }
+
+        
+    }
+    
     public void InsertBrand(Brand brands) {        
         try {   
             Dbcontext.getConnection();            
@@ -93,6 +122,20 @@ public class BrandDao {
             System.out.println("insert data successfully");
         } catch(SQLException ex) {
             System.err.println("Error in SQL: "+ex.toString());
+        }                
+    }
+    
+    
+    public void deleteBrand(int Brandid) {        
+        try {   
+            Dbcontext.getConnection();                       
+            String sql = "DELETE FROM brand WHERE Brandid = ?";
+            PreparedStatement  statement = (PreparedStatement) Dbcontext.getConnection().prepareStatement(sql);           
+            statement.setInt(1, Brandid);            
+            statement.executeUpdate();                        
+            System.out.println("delete data successfully");
+        } catch(SQLException ex) {
+            System.err.println("Delete error: "+ex.toString());
         }                
     }
 }
