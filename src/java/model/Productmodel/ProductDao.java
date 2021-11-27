@@ -231,4 +231,42 @@ public class ProductDao {
             System.err.println("Delete error: "+ex.toString());
         }                
     }
+    
+    public ArrayList<Product> getProductDetails(int id){
+        
+        ArrayList<Product> Products=new ArrayList<Product>();
+        try {
+            Class.forName("com.mysql.jdbc.Driver");
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(Dbcontext.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        try (
+                    
+                    Connection connection = Dbcontext.getConnection();
+                    Statement stmt = connection.createStatement();
+                    ResultSet rs = stmt.executeQuery("SELECT * FROM product INNER JOIN Brand ON Product.Brandid = Brand.Brandid INNER JOIN category ON Product.Categoryid = category.Categoryid WHERE Productid ='"+id+"'");) {
+
+                while (rs.next()) {
+                    Integer Productid=rs.getInt("Productid");
+                    String ProductName=rs.getString("ProductName");
+                    Float Price=rs.getFloat("Price");
+                    String Detail=rs.getString("Detail");
+                    Integer Brandid=rs.getInt("Brandid");
+                    Integer Categoryid=rs.getInt("Categoryid");
+                    String BrandName=rs.getString("BrandName");
+                    String CategoryName=rs.getString("CategoryName");
+                    
+                    
+                    Product pr=new Product(Productid, ProductName, Price, Detail,Brandid,BrandName,Categoryid,CategoryName);
+                    Products.add(pr);
+                }           
+            } catch (Exception e) {
+               
+                System.err.println(e.getMessage());
+            } finally{
+                    return Products;
+                }
+
+        
+    }
 }

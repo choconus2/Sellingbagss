@@ -194,6 +194,7 @@
                                                                     out.print("<td>");
                                                                     for (Image imss : Images) {
                                                                         out.println("<image style='width: 100px;height: 100px' src='../../img/ImageProduct/"+ imss.getImage() + "' />");
+                                                                        break;
                                                                     }
                                                                     out.print("</td>");
                                                                     out.print("<td>" + br.getDetail() + "</td>");
