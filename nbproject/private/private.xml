@@ -3,30 +3,38 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/bt_java/sellingbags/Sellingbagss/src/java/model/Brandmodel/Brand.java</file>
             <file>file:/C:/bt_java/sellingbags/Sellingbagss/web/WEB-INF/jsp/index.jsp</file>
-            <file>file:/C:/bt_java/sellingbags/Sellingbagss/web/Admin/HomeAdmin.jsp</file>
             <file>file:/C:/bt_java/sellingbags/Sellingbagss/nbproject/build-impl.xml~</file>
             <file>file:/C:/bt_java/sellingbags/Sellingbagss/web/Admin/Insert/InsertProduct.jsp</file>
-            <file>file:/C:/bt_java/sellingbags/Sellingbagss/src/java/model/ImgProductmodel/ImageDao.java</file>
             <file>file:/C:/bt_java/sellingbags/Sellingbagss/web/redirect.jsp</file>
             <file>file:/C:/bt_java/sellingbags/Sellingbagss/web/Admin/Delete/DeleteProduct.jsp</file>
+            <file>file:/C:/bt_java/sellingbags/Sellingbagss/web/Admin/LoginAdmin.jsp</file>
+            <file>file:/C:/bt_java/sellingbags/Sellingbagss/web/Admin/LogoutAdmin.jsp</file>
+            <file>file:/C:/bt_java/sellingbags/Sellingbagss/nbproject/build-impl.xml</file>
+            <file>file:/C:/bt_java/sellingbags/Sellingbagss/web/Home/SignupUser.jsp</file>
+            <file>file:/C:/bt_java/sellingbags/Sellingbagss/web/Admin/Table/TableCategory.jsp</file>
+            <file>file:/C:/bt_java/sellingbags/Sellingbagss/web/Admin/Table/TableBrand.jsp</file>
+            <file>file:/C:/bt_java/sellingbags/Sellingbagss/src/java/model/Productmodel/Product.java</file>
+            <file>file:/C:/bt_java/sellingbags/Sellingbagss/web/WEB-INF/web.xml</file>
+            <file>file:/C:/bt_java/sellingbags/Sellingbagss/src/java/model/Usermodel/UserDao.java</file>
+            <file>file:/C:/bt_java/sellingbags/Sellingbagss/web/Home/LoginUser.jsp</file>
+            <file>file:/C:/bt_java/sellingbags/Sellingbagss/src/java/model/Usermodel/User.java</file>
+            <file>file:/C:/bt_java/sellingbags/Sellingbagss/web/WEB-INF/applicationContext.xml</file>
+            <file>file:/C:/bt_java/sellingbags/Sellingbagss/src/java/model/Brandmodel/Brand.java</file>
+            <file>file:/C:/bt_java/sellingbags/Sellingbagss/web/Admin/HomeAdmin.jsp</file>
+            <file>file:/C:/bt_java/sellingbags/Sellingbagss/src/java/model/ImgProductmodel/ImageDao.java</file>
             <file>file:/C:/bt_java/sellingbags/Sellingbagss/web/Admin/Insert/InsertBrand.jsp</file>
             <file>file:/C:/bt_java/sellingbags/Sellingbagss/web/WEB-INF/dispatcher-servlet.xml</file>
             <file>file:/C:/bt_java/sellingbags/Sellingbagss/web/Admin/Table/TableProduct.jsp</file>
-            <file>file:/C:/bt_java/sellingbags/Sellingbagss/web/Admin/LogoutAdmin.jsp</file>
-            <file>file:/C:/bt_java/sellingbags/Sellingbagss/nbproject/build-impl.xml</file>
+            <file>file:/C:/bt_java/sellingbags/Sellingbagss/web/Home/HomeDetails.jsp</file>
             <file>file:/C:/bt_java/sellingbags/Sellingbagss/web/Admin/Delete/DeleteBrand.jsp</file>
             <file>file:/C:/bt_java/sellingbags/Sellingbagss/src/java/model/Brandmodel/BrandDao.java</file>
-            <file>file:/C:/bt_java/sellingbags/Sellingbagss/web/Admin/Table/TableCategory.jsp</file>
-            <file>file:/C:/bt_java/sellingbags/Sellingbagss/web/Admin/Table/TableBrand.jsp</file>
+            <file>file:/C:/bt_java/sellingbags/Sellingbagss/src/java/model/Categorymodel/CategoryDao.java</file>
             <file>file:/C:/bt_java/sellingbags/Sellingbagss/web/META-INF/context.xml</file>
-            <file>file:/C:/bt_java/sellingbags/Sellingbagss/web/WEB-INF/web.xml</file>
             <file>file:/C:/bt_java/sellingbags/Sellingbagss/web/Admin/Delete/DeleteProductbr.jsp</file>
             <file>file:/C:/bt_java/sellingbags/Sellingbagss/src/java/model/Productmodel/ProductDao.java</file>
             <file>file:/C:/bt_java/sellingbags/Sellingbagss/web/Home/Home.jsp</file>
             <file>file:/C:/bt_java/sellingbags/Sellingbagss/src/java/model/ImgProductmodel/Image.java</file>
-            <file>file:/C:/bt_java/sellingbags/Sellingbagss/web/WEB-INF/applicationContext.xml</file>
         </group>
     </open-files>
 </project-private>
