@@ -1,12 +1,9 @@
 <%-- 
-    Document   : HomeDetails
-    Created on : Nov 27, 2021, 8:37:05 AM
+    Document   : ShoppingCard
+    Created on : Dec 5, 2021, 9:41:13 AM
     Author     : hieun
 --%>
 
-<%@page import="java.util.ArrayList"%>
-<%@page import="model.ImgProductmodel.*"%>
-<%@page import="model.Productmodel.*"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html lang="zxx">
@@ -57,27 +54,168 @@
         </style>
         <style type="text/css">
 
-            .wap-ss-img{
-                text-align: center;
+            .card {
+                margin: auto;
+                max-width: 950px;
+                width: 90%;
+                box-shadow: 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+                border-radius: 1rem;
+                border: transparent
+            }
+
+            @media(max-width:767px) {
+                .card {
+                    margin: 3vh auto
+                }
+            }
+
+            .cart {
+                background-color: #fff;
+                padding: 4vh 5vh;
+                border-bottom-left-radius: 1rem;
+                border-top-left-radius: 1rem
+            }
+
+            @media(max-width:767px) {
+                .cart {
+                    padding: 4vh;
+                    border-bottom-left-radius: unset;
+                    border-top-right-radius: 1rem
+                }
+            }
+
+            .summary {
+                background-color: #ddd;
+                border-top-right-radius: 1rem;
+                border-bottom-right-radius: 1rem;
+                padding: 4vh;
+                color: rgb(65, 65, 65)
+            }
+
+            @media(max-width:767px) {
+                .summary {
+                    border-top-right-radius: unset;
+                    border-bottom-left-radius: 1rem
+                }
+            }
+
+            .summary .col-2 {
+                padding: 0
+            }
+
+            .summary .col-10 {
+                padding: 0
+            }
+
+            .row {
+                margin: 0
+            }
+
+            .title b {
+                font-size: 1.5rem
+            }
+
+            .main {
+                margin: 0;
+                padding: 2vh 0;
+                width: 100%
+            }
+
+            .col-2,
+            .col {
+                padding: 0 1vh
+            }
+
+            a {
+                padding: 0 1vh
+            }
+
+            .close {
+                margin-left: auto;
+                font-size: 0.7rem
+            }
+
+            img {
+                width: 3.5rem
+            }
+
+            .back-to-shop {
+                margin-top: 4.5rem
+            }
+
+            h5 {
+                margin-top: 4vh
+            }
+
+            hr {
+                margin-top: 1.25rem
+            }
+
+            form {
+                padding: 2vh 0
+            }
+
+            select {
+                border: 1px solid rgba(0, 0, 0, 0.137);
+                padding: 1.5vh 1vh;
+                margin-bottom: 4vh;
+                outline: none;
                 width: 100%;
+                background-color: rgb(247, 247, 247)
             }
-            .wap-ss-img img{
-                height: 250px;
-                margin: 0 auto;
+
+            input {
+                border: 1px solid rgba(0, 0, 0, 0.137);
+                padding: 1vh;
+                margin-bottom: 4vh;
+                outline: none;
+                width: 100%;
+                background-color: rgb(247, 247, 247)
             }
-            .textleft{
-                text-align: center;
+
+            input:focus::-webkit-input-placeholder {
+                color: transparent
             }
-            .slick-prev:before, .slick-next:before{
-                font-family: fontawesome;
-                font-size: 30px;
-                color: #fff;
+
+            .btn {
+                background-color: #000;
+                border-color: #000;
+                color: white;
+                width: 100%;
+                font-size: 0.7rem;
+                margin-top: 4vh;
+                padding: 1vh;
+                border-radius: 0
             }
-            .slick-prev:before{
-                content:'\f100';
+
+            .btn:focus {
+                box-shadow: none;
+                outline: none;
+                box-shadow: none;
+                color: white;
+                -webkit-box-shadow: none;
+                -webkit-user-select: none;
+                transition: none
             }
-            .slick-next:before{
-                content:'\f101';
+
+            .btn:hover {
+                color: white
+            }
+
+            a {
+                color: black
+            }
+
+            a:hover {
+                color: black;
+                text-decoration: none
+            }
+
+            #code {
+                background-image: linear-gradient(to left, rgba(255, 255, 255, 0.253), rgba(255, 255, 255, 0.185)), url("https://img.icons8.com/small/16/000000/long-arrow-right.png");
+                background-repeat: no-repeat;
+                background-position-x: 95%;
+                background-position-y: center
             }
         </style>
     </head>
@@ -195,12 +333,11 @@
                                                 <a href="ShoppingCard.jsp"><i class="fas fa-shopping-cart"></i></a>
                                             </div>
                                         </li>
-                                         <li style="margin: auto">
+                                        <li style="margin: auto">
                                              <div style="margin: auto">
                                                 <p style="margin: auto">Hello: <%out.println(session.getAttribute("username"));%></p>
                                             </div>
                                         </li>
-
                                     </ul>
                                 </div>
                                 <!-- Mobile Menu -->
@@ -224,7 +361,7 @@
                     <div class="row">
                         <div class="col-xl-12">
                             <div class="hero-cap text-center">
-                                <h2>product Details</h2>
+                                <h2>Shopping Cart</h2>
                             </div>
                         </div>
                     </div>
@@ -232,84 +369,74 @@
             </div>
         </div>
         <div class="product_image_area">
-            <div class="container">
-                <form action="" method="POST">
-                    <div class="row justify-content-center">
-
-                        <%
-                            String ProductName = "";
-                            String Detail = "";
-                            Float price = new Float(0.0);
-                            ProductDao pd = new ProductDao();
-                            ImageDao im = new ImageDao();
-                            ArrayList<Product> Products = pd.getProductDetails(Integer.parseInt(request.getParameter("Productid")));
-                            for (Product br : Products) {
-                                ProductName = br.getProductName();
-                                Detail = br.getDetail();
-                                price = br.getPrice();
-                            }
-                            out.print("");
-
-                        %>
-
-                        <div class="col-lg-12">
-                            <div id="wapper">
-                                <div class="row filtering">
-                                    <%                                            ArrayList<Image> Images = im.GetImage(Integer.parseInt(request.getParameter("Productid")));
-                                        for (Image imss : Images) {
-                                            out.print("<div class='col-md-12 col-sm-12 col-xs-12'>");
-                                            out.print("<div class='row'>");
-                                            out.print("<div class='wap-items-ss brbox'>");
-                                            out.print("<div class='wap-ss-img'>");
-                                            out.print("<img alt='' src='../img/ImageProduct/" + imss.getImage() + "' />");
-                                            out.print("</div>");
-                                            out.print("</div>");
-                                            out.print("</div>");
-                                            out.print("</div>");
-                                        }
-
-                                    %>
-
-
-
+            <div class="card">
+                <div class="row">
+                    <div class="col-md-8 cart">
+                        <div class="title">
+                            <div class="row">
+                                <div class="col">
+                                    <h4><b>Shopping Cart</b></h4>
                                 </div>
-                            </div> 
-
-
-
-
-
-                            <
-                        </div>
-                        <div class="col-lg-8">
-                            <div class="single_product_text text-center">
-
-                                <h3><% out.print(ProductName); %></h3>
-                                <hr> 
-                                <h2>The story behind</h2>
-                                <p>
-                                    <% out.print(Detail); %>
-                                </p>
-                                <div class="card_area">
-                                    <div class="product_count_area">
-                                        <p>Quantity</p>
-                                        <div class="product_count d-inline-block">
-                                            <span class="product_count_item " name="tru" id="tru"> <i class="ti-minus"></i></span>
-                                            <input class="product_count_item" type="text" value="1" min="0"
-                                                   max="10" name="soluong" id="soluong">
-                                            <span class="product_count_item" name="cong" id="cong"> <i class="ti-plus"></i></span>
-                                        </div>
-                                        <p id="gia"><% out.print(price);%></p>
-                                    </div>
-                                    <div class="add_to_cart">
-                                        <a href="#" class="btn_3">add to cart</a>
-                                    </div>
-                                </div>
+                                <div class="col align-self-center text-right text-muted">3 items</div>
                             </div>
                         </div>
+                        <div class="row border-top border-bottom">
+                            <div class="row main align-items-center">
+                                <div class="col-2"><img class="img-fluid" src="https://i.imgur.com/1GrakTl.jpg"></div>
+                                <div class="col">
+                                    <div class="row text-muted">Shirt</div>
+                                    <div class="row">Cotton T-shirt</div>
+                                </div>
+                                <div class="col"> <a href="#">-</a><a href="#" class="border">1</a><a href="#">+</a> </div>
+                                <div class="col">&euro; 44.00 <span class="close">&#10005;</span></div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="row main align-items-center">
+                                <div class="col-2"><img class="img-fluid" src="https://i.imgur.com/ba3tvGm.jpg"></div>
+                                <div class="col">
+                                    <div class="row text-muted">Shirt</div>
+                                    <div class="row">Cotton T-shirt</div>
+                                </div>
+                                <div class="col"> <a href="#">-</a><a href="#" class="border">1</a><a href="#">+</a> </div>
+                                <div class="col">&euro; 44.00 <span class="close">&#10005;</span></div>
+                            </div>
+                        </div>
+                        <div class="row border-top border-bottom">
+                            <div class="row main align-items-center">
+                                <div class="col-2"><img class="img-fluid" src="https://i.imgur.com/pHQ3xT3.jpg"></div>
+                                <div class="col">
+                                    <div class="row text-muted">Shirt</div>
+                                    <div class="row">Cotton T-shirt</div>
+                                </div>
+                                <div class="col"> <a href="#">-</a><a href="#" class="border">1</a><a href="#">+</a> </div>
+                                <div class="col">&euro; 44.00 <span class="close">&#10005;</span></div>
+                            </div>
+                        </div>
+                        
+                        
                     </div>
-                </form>
-
+                    <div class="col-md-4 summary">
+                        <div>
+                            <h5><b>Summary</b></h5>
+                        </div>
+                        <hr>
+                        <div class="row">
+                            <div class="col" style="padding-left:0;">ITEMS 3</div>
+                            <div class="col text-right">&euro; 132.00</div>
+                        </div>
+                        <form>
+                            <p>SHIPPING</p> <select>
+                                <option class="text-muted">Standard-Delivery- &euro;5.00</option>
+                            </select>
+                            <p>GIVE CODE</p> <input id="code" placeholder="Enter your code">
+                        </form>
+                        <div class="row" style="border-top: 1px solid rgba(0,0,0,.1); padding: 2vh 0;">
+                            <div class="col">TOTAL PRICE</div>
+                            <div class="col text-right">&euro; 137.00</div>
+                        </div> <button class="btn">CHECKOUT</button>
+                    </div>
+                </div>
             </div>
         </div>
         <!--================End Single Product Area =================-->
@@ -448,35 +575,7 @@
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.9.0/slick.min.js" integrity="sha512-HGOnQO9+SP1V92SrtZfjqxxtLmVzqZpjFFekvzZVWoiASSQgSr4cw9Kqd2+l8Llp4Gm0G8GIFJ4ddwZilcdb8A==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.9.0/slick.js" integrity="sha512-eP8DK17a+MOcKHXC5Yrqzd8WI5WKh6F1TIk5QZ/8Lbv+8ssblcz7oGC8ZmQ/ZSAPa7ZmsCU4e/hcovqR8jfJqA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-        <script type="text/javascript">
-                                        $('.filtering').slick({
-                                            dots: true,
-                                            infinite: true,
-                                            speed: 500,
-                                            fade: true,
-                                        });
 
-
-        </script>
-        <script type="text/javascript">
-            $(document).ready(function() { 
-                var gias=$('#gia').text();
-                $('#tru').bind('click', function(event){    
-                    if(parseInt($('#soluong').val())>1){
-                        $('#soluong').val(parseInt($('#soluong').val())-1);
-                        $('#gia').text(gias*parseInt($('#soluong').val()));
-                    }                        
-                }); 
-                
-                $('#cong').bind('click', function(event){ 
-                    if(parseInt($('#soluong').val())<10){
-                        $('#soluong').val(parseInt($('#soluong').val())+1);
-                        $('#gia').text(gias*parseInt($('#soluong').val()));
-                    }
-                    
-                });
-            });
-        </script>
 
     </body>
 

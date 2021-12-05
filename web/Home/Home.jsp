@@ -11,7 +11,11 @@
 
 <!doctype html>
 <html class="no-js" lang="zxx">
-
+    <%
+        if (session.getAttribute("username") == null) {
+            response.sendRedirect("LoginUser.jsp");
+        }
+    %>
     <head>
         <meta charset="utf-8">
         <meta http-equiv="x-ua-compatible" content="ie=edge">
@@ -67,9 +71,7 @@
                             <div class="row align-items-center">
                                 <!-- Logo -->
                                 <div class="col-xl-1 col-lg-1 col-md-1 col-sm-3">
-                                    <div class="logo">
-                                        <a href="index.php"><img src="logo.png" class="img-thumbnail" style="border: none;" alt="Logo"></a>
-                                    </div>
+
                                 </div>
                                 <div class="col-xl-6 col-lg-8 col-md-7 col-sm-5">
                                     <!-- Main-menu -->
@@ -194,10 +196,14 @@
                                             </li>
                                             <li>
                                                 <div class="shopping-card">
-                                                    <a href="#"><i class="fas fa-shopping-cart"></i></a>
+                                                    <a href="ShoppingCard.jsp"><i class="fas fa-shopping-cart"></i></a>
                                                 </div>
                                             </li>
-
+                                            <li style="margin: auto">
+                                                <div style="margin: auto">
+                                                    <p style="margin: auto">Hello: <%out.println(session.getAttribute("username"));%></p>
+                                                </div>
+                                            </li>    
                                         </ul>
                                         <input id="chinhser" type="submit" name="submit" value="">
                                     </form> 
@@ -318,33 +324,64 @@
                                     String x = request.getParameter("Page");
                                     ArrayList<Product> Products = db.GetProduct((Integer.parseInt(x) - 1) * 6);
                                     for (Product br : Products) {
-                                        out.print("<a href='HomeDetails.jsp?Productid="+br.getProductid()+"' >");
+                                        out.print("<a href='HomeDetails.jsp?Productid=" + br.getProductid() + "' >");
                                         out.print("<div class='col-xl-4 col-lg-4 col-md-6'>");
                                         out.print("<div class='single-product mb-60'>");
                                         out.print("<div class='product-img'>");
                                         ArrayList<Image> Images = im.GetImage(br.getProductid());
                                         for (Image imss : Images) {
-                                             out.print("<img style='width: 300px;height: 300px' src='../img/ImageProduct/"+imss.getImage()+"' />");
+                                            out.print("<img style='width: 300px;height: 300px' src='../img/ImageProduct/" + imss.getImage() + "' />");
                                             break;
-                                        }                                     
-                                        out.print("</div>"); 
-                                        out.print("<div class='product-caption'>");
-                                        out.print("<h4><a>"+ br.getProductName()+"</a></h4>");
-                                        out.print("<div class='price'>"+br.getPrice()+"</div>");
+                                        }
                                         out.print("</div>");
-                                        out.print("</div>"); 
-                                        out.print("</div>");                                   
+                                        out.print("<div class='product-caption'>");
+                                        out.print("<h4><a>" + br.getProductName() + "</a></h4>");
+                                        out.print("<div class='price'>" + br.getPrice() + "</div>");
+                                        out.print("</div>");
+                                        out.print("</div>");
+                                        out.print("</div>");
                                         out.print("</a>");
-                      
+
                                     }
                                 %>
-                                
+
                             </div>
+
                         </div>
                         <!-- End Nav Card -->
                     </div>
                     <div class="container">                
+                        <ul class="pagination">
+                            <%
+                                int dem = 0;
 
+                                ArrayList<Product> countbr = db.CountProduct();
+                                int tongso = countbr.size();
+                                double a = (double) tongso / 6;
+                                int sotrang = (int) Math.ceil(a);
+                                String listpage = " ";
+                                for (int i = 1; i <= sotrang; i++) {
+                                    if (i == Integer.parseInt(x)) {
+                                        dem = i;
+                                        listpage += "<li class='page-item active'><a class='page-link' href='Home.jsp?Page=" + i + "'>" + i + "</a></li>";
+                                    } else {
+                                        listpage += "<li><a class='page-link' href='Home.jsp?Page=" + i + "'>" + i + "</a></li>";
+                                    }
+
+                                }
+                                int dem2 = dem + 1;
+                                int dem3 = dem - 1;
+                                if (dem > 1) {
+                                    out.print("<li ><a class='page-link' href='Home.jsp?Page=" + dem3 + "'>Previous</a></li>");
+                                }
+
+                                out.print(listpage);
+                                if (dem < sotrang) {
+                                    out.print("<li ><a class='page-link' href='Home.jsp?Page=" + dem2 + "'>Next</a></li>");
+                                }
+
+                            %>
+                        </ul>
                     </div>
                 </div>    
             </section>
@@ -409,9 +446,7 @@
                             <div class="single-footer-caption mb-50">
                                 <div class="single-footer-caption mb-30">
                                     <!-- logo -->
-                                    <div class="footer-logo">
-                                        <a href="index.php"><img src="logo.png" alt=""></a>
-                                    </div>
+
                                     <div class="footer-tittle">
                                         <div class="footer-pera">
                                             <p>Inspire your day with fashion.</p>

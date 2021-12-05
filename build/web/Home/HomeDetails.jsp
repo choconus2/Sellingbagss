@@ -10,7 +10,11 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html lang="zxx">
-
+    <%
+            if(session.getAttribute("username")==null){
+                response.sendRedirect("LoginUser.jsp");        
+            }
+        %>
 
     <head>
         <meta charset="utf-8">
@@ -52,7 +56,7 @@
             }
         </style>
         <style type="text/css">
-            
+
             .wap-ss-img{
                 text-align: center;
                 width: 100%;
@@ -91,9 +95,7 @@
                             <div class="row align-items-center">
                                 <!-- Logo -->
                                 <div class="col-xl-1 col-lg-1 col-md-1 col-sm-3">
-                                    <div class="logo">
-                                        <a href="index.php"><img src="logo.png" class="img-thumbnail" style="border: none;" alt="Logo"></a>
-                                    </div>
+                                    
                                 </div>
                                 <div class="col-xl-6 col-lg-8 col-md-7 col-sm-5">
                                     <!-- Main-menu -->
@@ -190,7 +192,12 @@
 
                                         <li>
                                             <div class="shopping-card">
-                                                <a href="cart.html"><i class="fas fa-shopping-cart"></i></a>
+                                                <a href="ShoppingCard.jsp"><i class="fas fa-shopping-cart"></i></a>
+                                            </div>
+                                        </li>
+                                         <li style="margin: auto">
+                                             <div style="margin: auto">
+                                                <p style="margin: auto">Hello: <%out.println(session.getAttribute("username"));%></p>
                                             </div>
                                         </li>
 
@@ -226,81 +233,83 @@
         </div>
         <div class="product_image_area">
             <div class="container">
-                <div class="row justify-content-center">
+                <form action="" method="POST">
+                    <div class="row justify-content-center">
 
-                    <%
-                        String ProductName = "";
-                        String Detail = "";
-                        Float price = new Float(0.0);
-                        ProductDao pd = new ProductDao();
-                        ImageDao im = new ImageDao();
-                        ArrayList<Product> Products = pd.getProductDetails(Integer.parseInt(request.getParameter("Productid")));
-                        for (Product br : Products) {
-                            ProductName = br.getProductName();
-                            Detail = br.getDetail();
-                            price = br.getPrice();
-                        }
-                        out.print("");
+                        <%
+                            String ProductName = "";
+                            String Detail = "";
+                            Float price = new Float(0.0);
+                            ProductDao pd = new ProductDao();
+                            ImageDao im = new ImageDao();
+                            ArrayList<Product> Products = pd.getProductDetails(Integer.parseInt(request.getParameter("Productid")));
+                            for (Product br : Products) {
+                                ProductName = br.getProductName();
+                                Detail = br.getDetail();
+                                price = br.getPrice();
+                            }
+                            out.print("");
 
-                    %>
-                    
-                    <div class="col-lg-12">
-                        <div id="wapper">
-                                    <div class="row filtering">
-                                        <%                                      
-                                            ArrayList<Image> Images = im.GetImage(Integer.parseInt(request.getParameter("Productid")));
-                                            for (Image imss : Images) {
-                                                out.print("<div class='col-md-12 col-sm-12 col-xs-12'>");
-                                                out.print("<div class='row'>");
-                                                out.print("<div class='wap-items-ss brbox'>");
-                                                out.print("<div class='wap-ss-img'>");
-                                                out.print("<img alt='' src='../img/ImageProduct/" + imss.getImage() + "' />");
-                                                out.print("</div>");
-                                                out.print("</div>");
-                                                out.print("</div>");
-                                                out.print("</div>");
-                                            }
+                        %>
 
-                                        %>
-                                        
+                        <div class="col-lg-12">
+                            <div id="wapper">
+                                <div class="row filtering">
+                                    <%                                            ArrayList<Image> Images = im.GetImage(Integer.parseInt(request.getParameter("Productid")));
+                                        for (Image imss : Images) {
+                                            out.print("<div class='col-md-12 col-sm-12 col-xs-12'>");
+                                            out.print("<div class='row'>");
+                                            out.print("<div class='wap-items-ss brbox'>");
+                                            out.print("<div class='wap-ss-img'>");
+                                            out.print("<img alt='' src='../img/ImageProduct/" + imss.getImage() + "' />");
+                                            out.print("</div>");
+                                            out.print("</div>");
+                                            out.print("</div>");
+                                            out.print("</div>");
+                                        }
 
-                                        
-                                    </div>
-                                </div> 
-                                 
-                                
+                                    %>
+
+
+
+                                </div>
+                            </div> 
+
+
 
 
 
                             <
-                    </div>
-                    <div class="col-lg-8">
-                        <div class="single_product_text text-center">
+                        </div>
+                        <div class="col-lg-8">
+                            <div class="single_product_text text-center">
 
-                            <h3><% out.print(ProductName); %></h3>
-                            <hr> 
-                            <h2>The story behind</h2>
-                            <p>
-                                <% out.print(Detail); %>
-                            </p>
-                            <div class="card_area">
-                                <div class="product_count_area">
-                                    <p>Quantity</p>
-                                    <div class="product_count d-inline-block">
-                                        <span class="product_count_item inumber-decrement"> <i class="ti-minus"></i></span>
-                                        <input class="product_count_item input-number" type="text" value="1" min="0"
-                                               max="10" name="chon">
-                                        <span class="product_count_item number-increment"> <i class="ti-plus"></i></span>
+                                <h3><% out.print(ProductName); %></h3>
+                                <hr> 
+                                <h2>The story behind</h2>
+                                <p>
+                                    <% out.print(Detail); %>
+                                </p>
+                                <div class="card_area">
+                                    <div class="product_count_area">
+                                        <p>Quantity</p>
+                                        <div class="product_count d-inline-block">
+                                            <span class="product_count_item " name="tru" id="tru"> <i class="ti-minus"></i></span>
+                                            <input class="product_count_item" type="text" value="1" min="0"
+                                                   max="10" name="soluong" id="soluong">
+                                            <span class="product_count_item" name="cong" id="cong"> <i class="ti-plus"></i></span>
+                                        </div>
+                                        <p id="gia"><% out.print(price);%></p>
                                     </div>
-                                    <p><% out.print(price);%></p>
-                                </div>
-                                <div class="add_to_cart">
-                                    <a href="#" class="btn_3">add to cart</a>
+                                    <div class="add_to_cart">
+                                        <a href="#" class="btn_3">add to cart</a>
+                                    </div>
                                 </div>
                             </div>
                         </div>
                     </div>
-                </div>
+                </form>
+
             </div>
         </div>
         <!--================End Single Product Area =================-->
@@ -314,9 +323,7 @@
                             <div class="single-footer-caption mb-50">
                                 <div class="single-footer-caption mb-30">
                                     <!-- logo -->
-                                    <div class="footer-logo">
-                                        <a href="index.php"><img src="logo.png" alt=""></a>
-                                    </div>
+                                    
                                     <div class="footer-tittle">
                                         <div class="footer-pera">
                                             <p>Inspire your day with fashion.</p>
@@ -442,14 +449,33 @@
         <script src="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.9.0/slick.min.js" integrity="sha512-HGOnQO9+SP1V92SrtZfjqxxtLmVzqZpjFFekvzZVWoiASSQgSr4cw9Kqd2+l8Llp4Gm0G8GIFJ4ddwZilcdb8A==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.9.0/slick.js" integrity="sha512-eP8DK17a+MOcKHXC5Yrqzd8WI5WKh6F1TIk5QZ/8Lbv+8ssblcz7oGC8ZmQ/ZSAPa7ZmsCU4e/hcovqR8jfJqA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
         <script type="text/javascript">
-            $('.filtering').slick({
-                dots: true,
-                infinite: true,
-                speed: 500,
-                fade: true,                                           
-            });
+                                        $('.filtering').slick({
+                                            dots: true,
+                                            infinite: true,
+                                            speed: 500,
+                                            fade: true,
+                                        });
 
-                                        
+
+        </script>
+        <script type="text/javascript">
+            $(document).ready(function() { 
+                var gias=$('#gia').text();
+                $('#tru').bind('click', function(event){    
+                    if(parseInt($('#soluong').val())>1){
+                        $('#soluong').val(parseInt($('#soluong').val())-1);
+                        $('#gia').text(gias*parseInt($('#soluong').val()));
+                    }                        
+                }); 
+                
+                $('#cong').bind('click', function(event){ 
+                    if(parseInt($('#soluong').val())<10){
+                        $('#soluong').val(parseInt($('#soluong').val())+1);
+                        $('#gia').text(gias*parseInt($('#soluong').val()));
+                    }
+                    
+                });
+            });
         </script>
 
     </body>
