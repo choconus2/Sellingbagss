@@ -94,4 +94,18 @@ public class CategoryDao {
             System.err.println("Error in SQL: "+ex.toString());
         }                
     }
+    
+    public void UpdateCategory(Category Categorys) {        
+        try {   
+            Dbcontext.getConnection();            
+            String sql = "UPDATE category SET CategoryName=? WHERE Categoryid=?";
+            PreparedStatement  statement = (PreparedStatement) Dbcontext.getConnection().prepareStatement(sql);           
+            statement.setString(1, Categorys.getCategoryName());
+            statement.setInt(2, Categorys.getCategoryid());
+            statement.executeUpdate();                        
+            System.out.println("Update data successfully");
+        } catch(SQLException ex) {
+            System.err.println("Error in SQL: "+ex.toString());
+        }                
+    }
 }

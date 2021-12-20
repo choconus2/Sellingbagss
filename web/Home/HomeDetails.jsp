@@ -4,6 +4,10 @@
     Author     : hieun
 --%>
 
+<%@page import="model.OrderDetailmodel.*"%>
+<%@page import="java.util.Date"%>
+<%@page import="java.text.SimpleDateFormat"%>
+<%@page import="model.Ordermodel.*"%>
 <%@page import="java.util.ArrayList"%>
 <%@page import="model.ImgProductmodel.*"%>
 <%@page import="model.Productmodel.*"%>
@@ -11,10 +15,10 @@
 <!DOCTYPE html>
 <html lang="zxx">
     <%
-            if(session.getAttribute("username")==null){
-                response.sendRedirect("LoginUser.jsp");        
-            }
-        %>
+        if (session.getAttribute("username") == null) {
+            response.sendRedirect("LoginUser.jsp");
+        }
+    %>
 
     <head>
         <meta charset="utf-8">
@@ -95,7 +99,7 @@
                             <div class="row align-items-center">
                                 <!-- Logo -->
                                 <div class="col-xl-1 col-lg-1 col-md-1 col-sm-3">
-                                    
+
                                 </div>
                                 <div class="col-xl-6 col-lg-8 col-md-7 col-sm-5">
                                     <!-- Main-menu -->
@@ -195,8 +199,8 @@
                                                 <a href="ShoppingCard.jsp"><i class="fas fa-shopping-cart"></i></a>
                                             </div>
                                         </li>
-                                         <li style="margin: auto">
-                                             <div style="margin: auto">
+                                        <li style="margin: auto">
+                                            <div style="margin: auto">
                                                 <p style="margin: auto">Hello: <%out.println(session.getAttribute("username"));%></p>
                                             </div>
                                         </li>
@@ -233,10 +237,11 @@
         </div>
         <div class="product_image_area">
             <div class="container">
-                <form action="" method="POST">
+                <form  <% out.print("action='HomeDetails.jsp?Productid="+ request.getParameter("Productid")+"'"); %> method="POST">
+                    
                     <div class="row justify-content-center">
 
-                        <%
+                        <%                            
                             String ProductName = "";
                             String Detail = "";
                             Float price = new Float(0.0);
@@ -255,7 +260,8 @@
                         <div class="col-lg-12">
                             <div id="wapper">
                                 <div class="row filtering">
-                                    <%                                            ArrayList<Image> Images = im.GetImage(Integer.parseInt(request.getParameter("Productid")));
+                                    <%                                            
+                                        ArrayList<Image> Images = im.GetImage(Integer.parseInt(request.getParameter("Productid")));
                                         for (Image imss : Images) {
                                             out.print("<div class='col-md-12 col-sm-12 col-xs-12'>");
                                             out.print("<div class='row'>");
@@ -302,12 +308,52 @@
                                         <p id="gia"><% out.print(price);%></p>
                                     </div>
                                     <div class="add_to_cart">
-                                        <a href="#" class="btn_3">add to cart</a>
+                                        <input class="btn_3" type="submit" name="Buy" value="Buy"/>
+                                        <input class="btn_3" type="submit" name="addcart" value="add to cart"/>
                                     </div>
                                 </div>
                             </div>
                         </div>
                     </div>
+                                    <%
+                        OrderDao Or = new OrderDao();
+                        OrderDetailDao ord=new OrderDetailDao();
+                        Date date = new Date();
+                        SimpleDateFormat formatter = new SimpleDateFormat("dd-MM-yyyy HH:mm:ss");
+
+                        String pp=(String)session.getAttribute("userid");
+  
+                        int x=Integer.parseInt(pp);
+                        String soluong=request.getParameter("soluong");
+                        int xem=0;
+                        if (request.getParameter("Buy") != null) {
+                            if(Or.GetOrder(x)==0){
+                                Or.InsertOrder(new Order(0,formatter.format(date),6,x));
+                                
+                            }
+                            ArrayList<OrderDetail> OrderDetailss = ord.GetOderDetail(x);
+                            if(OrderDetailss.isEmpty()){
+                                ord.InsertOrderDetail(new OrderDetail(Integer.parseInt(soluong),Or.GetOrder(x),Integer.parseInt(request.getParameter("Productid"))));
+                            }
+                            for (OrderDetail ords : OrderDetailss) {
+                                out.print(Integer.parseInt(request.getParameter("Productid"))+"  "+ords.getProductid());
+                                if(Integer.parseInt(request.getParameter("Productid"))==ords.getProductid() ){
+                                    ord.UpdateOrderDetail(new OrderDetail(Integer.parseInt(soluong)+ords.getQuantity(),Integer.parseInt(request.getParameter("Productid")),x,6));
+                                    break;
+                                }else{
+                                    xem=1;
+                                                   
+                                }
+                                
+                            }
+                            if(xem==1){
+                                ord.InsertOrderDetail(new OrderDetail(Integer.parseInt(soluong),Or.GetOrder(x),Integer.parseInt(request.getParameter("Productid"))));
+                            }
+                            
+                            response.sendRedirect("ShoppingCard.jsp");
+                        }
+
+                    %>
                 </form>
 
             </div>
@@ -323,7 +369,7 @@
                             <div class="single-footer-caption mb-50">
                                 <div class="single-footer-caption mb-30">
                                     <!-- logo -->
-                                    
+
                                     <div class="footer-tittle">
                                         <div class="footer-pera">
                                             <p>Inspire your day with fashion.</p>
@@ -400,7 +446,7 @@
             </div>
             <!-- Footer End-->
         </footer>
-
+        
         <!-- JS here -->
         <!-- All JS Custom Plugins Link Here here -->
         <script src="assets/js/vendor/modernizr-3.5.0.min.js"></script>
@@ -459,21 +505,21 @@
 
         </script>
         <script type="text/javascript">
-            $(document).ready(function() { 
-                var gias=$('#gia').text();
-                $('#tru').bind('click', function(event){    
-                    if(parseInt($('#soluong').val())>1){
-                        $('#soluong').val(parseInt($('#soluong').val())-1);
-                        $('#gia').text(gias*parseInt($('#soluong').val()));
-                    }                        
-                }); 
-                
-                $('#cong').bind('click', function(event){ 
-                    if(parseInt($('#soluong').val())<10){
-                        $('#soluong').val(parseInt($('#soluong').val())+1);
-                        $('#gia').text(gias*parseInt($('#soluong').val()));
+            $(document).ready(function () {
+                var gias = $('#gia').text();
+                $('#tru').bind('click', function (event) {
+                    if (parseInt($('#soluong').val()) > 1) {
+                        $('#soluong').val(parseInt($('#soluong').val()) - 1);
+                        $('#gia').text(gias * parseInt($('#soluong').val()));
                     }
-                    
+                });
+
+                $('#cong').bind('click', function (event) {
+                    if (parseInt($('#soluong').val()) < 10) {
+                        $('#soluong').val(parseInt($('#soluong').val()) + 1);
+                        $('#gia').text(gias * parseInt($('#soluong').val()));
+                    }
+
                 });
             });
         </script>

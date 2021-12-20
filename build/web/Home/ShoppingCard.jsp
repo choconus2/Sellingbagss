@@ -4,14 +4,18 @@
     Author     : hieun
 --%>
 
+<%@page import="model.Ordermodel.*"%>
+<%@page import="model.ImgProductmodel.*"%>
+<%@page import="java.util.ArrayList"%>
+<%@page import="model.OrderDetailmodel.*"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html lang="zxx">
     <%
-            if(session.getAttribute("username")==null){
-                response.sendRedirect("LoginUser.jsp");        
-            }
-        %>
+        if (session.getAttribute("username") == null) {
+            response.sendRedirect("LoginUser.jsp");
+        }
+    %>
 
     <head>
         <meta charset="utf-8">
@@ -53,7 +57,11 @@
             }
         </style>
         <style type="text/css">
-
+            button{
+                background-color: white;
+                border-color: white;
+                border: none;
+            }
             .card {
                 margin: auto;
                 max-width: 950px;
@@ -126,7 +134,7 @@
                 padding: 0 1vh
             }
 
-            a {
+            a,b {
                 padding: 0 1vh
             }
 
@@ -199,7 +207,8 @@
             }
 
             .btn:hover {
-                color: white
+                background-color: red;
+                color: black;
             }
 
             a {
@@ -233,7 +242,7 @@
                             <div class="row align-items-center">
                                 <!-- Logo -->
                                 <div class="col-xl-1 col-lg-1 col-md-1 col-sm-3">
-                                    
+
                                 </div>
                                 <div class="col-xl-6 col-lg-8 col-md-7 col-sm-5">
                                     <!-- Main-menu -->
@@ -294,20 +303,7 @@
                                                 <li class="hot">
                                                     <a href="#">Top Brand</a>
                                                     <ul class="submenu">
-                                                        <?php  
-                                                        $Tea = in_hang();
-                                                        $count = mysqli_num_rows($Tea);
-                                                        for ($i = 0; $i < $count; $i++):
-                                                        $ProductType = mysqli_fetch_assoc($Tea); 
-                                                        $IdProductType = mysqli_insert_id($db);
-                                                        ?>
-                                                        <li><a
-                                                                href="<?php echo "homesanpham.php?idBrand=".$ProductType['idBrand'];?>"><?php echo $ProductType['brandName']; ?></a>
-                                                        </li>
-                                                        <?php 
-                                                        endfor; 
-                                                        mysqli_free_result($Tea);
-                                                        ?>
+                                                        
                                                     </ul>
 
                                                 </li>
@@ -334,7 +330,7 @@
                                             </div>
                                         </li>
                                         <li style="margin: auto">
-                                             <div style="margin: auto">
+                                            <div style="margin: auto">
                                                 <p style="margin: auto">Hello: <%out.println(session.getAttribute("username"));%></p>
                                             </div>
                                         </li>
@@ -380,41 +376,38 @@
                                 <div class="col align-self-center text-right text-muted">3 items</div>
                             </div>
                         </div>
-                        <div class="row border-top border-bottom">
-                            <div class="row main align-items-center">
-                                <div class="col-2"><img class="img-fluid" src="https://i.imgur.com/1GrakTl.jpg"></div>
-                                <div class="col">
-                                    <div class="row text-muted">Shirt</div>
-                                    <div class="row">Cotton T-shirt</div>
-                                </div>
-                                <div class="col"> <a href="#">-</a><a href="#" class="border">1</a><a href="#">+</a> </div>
-                                <div class="col">&euro; 44.00 <span class="close">&#10005;</span></div>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="row main align-items-center">
-                                <div class="col-2"><img class="img-fluid" src="https://i.imgur.com/ba3tvGm.jpg"></div>
-                                <div class="col">
-                                    <div class="row text-muted">Shirt</div>
-                                    <div class="row">Cotton T-shirt</div>
-                                </div>
-                                <div class="col"> <a href="#">-</a><a href="#" class="border">1</a><a href="#">+</a> </div>
-                                <div class="col">&euro; 44.00 <span class="close">&#10005;</span></div>
-                            </div>
-                        </div>
-                        <div class="row border-top border-bottom">
-                            <div class="row main align-items-center">
-                                <div class="col-2"><img class="img-fluid" src="https://i.imgur.com/pHQ3xT3.jpg"></div>
-                                <div class="col">
-                                    <div class="row text-muted">Shirt</div>
-                                    <div class="row">Cotton T-shirt</div>
-                                </div>
-                                <div class="col"> <a href="#">-</a><a href="#" class="border">1</a><a href="#">+</a> </div>
-                                <div class="col">&euro; 44.00 <span class="close">&#10005;</span></div>
-                            </div>
-                        </div>
-                        
-                        
+                        <%
+                            OrderDetailDao db = new OrderDetailDao();
+                            ImageDao im = new ImageDao();
+                            int orderId=0;
+                            //out.println(db.sayHello());
+                            String x = (String) session.getAttribute("userid");
+                            ArrayList<OrderDetail> OrderDetails = db.GetOderDetail(Integer.parseInt(x));
+                            for (OrderDetail br : OrderDetails) {
+                                out.print("<div class='row border-top border-bottom'>");
+                                out.print("<div class='row main align-items-center'>");
+                                out.print("<div class='col-2'>");
+                                ArrayList<Image> Images = im.GetImage(br.getProductid());
+                                for (Image imss : Images) {
+                                    out.print("<img class='img-fluid' src='../img/ImageProduct/"+imss.getImage()+"'>");
+                                    break;
+                                }
+                                orderId=br.getOrderId();
+                                out.print("</div>");
+                                out.print("<div class='col'>");
+                                out.print("<div class='row text-muted'>Shirt</div>");
+                                out.print("<div class='row'>"+br.getProductName()+"</div>");
+                                out.print("</div>");
+                                out.print("<div class='col'> <button><b>-</b></button><a class='border'>"+br.getQuantity()+"</a><button><b>+</b></button> </div>");
+                                out.print("<div class='col'>&euro; "+br.getQuantity()*br.getPrice()+" <span class='close'>&#10005;</span></div>");
+                                out.print("</div>");
+                                out.print("</div>");
+                            }
+                        %>
+
+
+
+
                     </div>
                     <div class="col-md-4 summary">
                         <div>
@@ -425,16 +418,25 @@
                             <div class="col" style="padding-left:0;">ITEMS 3</div>
                             <div class="col text-right">&euro; 132.00</div>
                         </div>
-                        <form>
+                        <form action="ShoppingCard.jsp" method="POST">
                             <p>SHIPPING</p> <select>
                                 <option class="text-muted">Standard-Delivery- &euro;5.00</option>
                             </select>
                             <p>GIVE CODE</p> <input id="code" placeholder="Enter your code">
-                        </form>
-                        <div class="row" style="border-top: 1px solid rgba(0,0,0,.1); padding: 2vh 0;">
+                            <div class="row" style="border-top: 1px solid rgba(0,0,0,.1); padding: 2vh 0;">
                             <div class="col">TOTAL PRICE</div>
                             <div class="col text-right">&euro; 137.00</div>
-                        </div> <button class="btn">CHECKOUT</button>
+                            </div><input name="add" class="btn" type="submit" value="CHECK OUT" >
+                        </form>
+                        <%
+                            OrderDao or=new OrderDao();
+                            if(request.getParameter("add")!=null){
+                                out.print(orderId);                         
+                                or.UpdateOrders(new Order(orderId, 7));    
+                                response.sendRedirect("ShoppingCard.jsp");
+                            }
+                        
+                        %>
                     </div>
                 </div>
             </div>
@@ -450,7 +452,7 @@
                             <div class="single-footer-caption mb-50">
                                 <div class="single-footer-caption mb-30">
                                     <!-- logo -->
-                                    
+
                                     <div class="footer-tittle">
                                         <div class="footer-pera">
                                             <p>Inspire your day with fashion.</p>

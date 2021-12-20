@@ -138,4 +138,19 @@ public class BrandDao {
             System.err.println("Delete error: "+ex.toString());
         }                
     }
+    
+    public void UpdateBrand(Brand brands) {        
+        try {   
+            Dbcontext.getConnection();            
+            String sql = "UPDATE brand SET BrandName=?,Logo=? WHERE Brandid=?";
+            PreparedStatement  statement = (PreparedStatement) Dbcontext.getConnection().prepareStatement(sql);           
+            statement.setString(1, brands.getBrandName());
+            statement.setString(2, brands.getLogo());
+            statement.setInt(3, brands.getBrandid());
+            statement.executeUpdate();                        
+            System.out.println("Update data successfully");
+        } catch(SQLException ex) {
+            System.err.println("Error in SQL: "+ex.toString());
+        }                
+    }
 }

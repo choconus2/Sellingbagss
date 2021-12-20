@@ -123,6 +123,15 @@
                                     <li>
                                         <a href="../../Admin/Table/TableCategory.jsp?Page=1">Table Category</a>
                                     </li>
+                                    <li>
+                                        <a href="../../Admin/Table/OrdersConfirmation.jsp?Page=1">Orders are waiting for confirmation</a>
+                                    </li>
+                                    <li>
+                                        <a href="../../Admin/Table/OrdersConfirmation.jsp?Page=1">Orders are waiting for confirmation</a>
+                                    </li>
+                                    <li>
+                                        <a href="../../Admin/Table/BeingTransported.jsp?Page=1">Being Transported</a>
+                                    </li>
                                 </ul>
                                 <!-- /.nav-second-level -->
                             </li>                          
@@ -185,6 +194,7 @@
                                                                     out.print("<td>" + br.getBrandName() + "</td>");
                                                                     out.print("<td>" + "<image style='width: 200px;height: 200px' src='../../img/LogoBrand/" + br.getLogo() + "' />" + "</td>");
                                                                     out.print("<td><a href='../Delete/DeleteBrand.jsp?Brandid=" + br.getBrandid()+ "'>Delete</a></td> ");
+                                                                    out.print("<td><a href='../Update/UpdateBrand.jsp?Brandid=" + br.getBrandid()+ "'>Update</a></td> ");
                                                                     out.print("</tr>");
                                                                 }
                                                             %>

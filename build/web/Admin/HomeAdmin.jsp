@@ -110,6 +110,12 @@
                                     <li>
                                         <a href="../Admin/Table/TableCategory.jsp?Page=1">Table Category</a>
                                     </li>
+                                    <li>
+                                        <a href="../Admin/Table/OrdersConfirmation.jsp?Page=1">Orders are waiting for confirmation</a>
+                                    </li>
+                                    <li>
+                                        <a href="../Admin/Table/BeingTransported.jsp?Page=1">Being Transported</a>
+                                    </li>
                                 </ul>
                                 <!-- /.nav-second-level -->
                             </li>                          

@@ -4,8 +4,10 @@
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
             <file>file:/C:/bt_java/sellingbags/Sellingbagss/web/WEB-INF/jsp/index.jsp</file>
+            <file>file:/C:/bt_java/sellingbags/Sellingbagss/src/java/model/OrderDetailmodel/OrderDetailDao.java</file>
             <file>file:/C:/bt_java/sellingbags/Sellingbagss/nbproject/build-impl.xml~</file>
             <file>file:/C:/bt_java/sellingbags/Sellingbagss/web/Admin/Insert/InsertProduct.jsp</file>
+            <file>file:/C:/bt_java/sellingbags/Sellingbagss/web/Home/ShoppingCard.jsp</file>
             <file>file:/C:/bt_java/sellingbags/Sellingbagss/web/redirect.jsp</file>
             <file>file:/C:/bt_java/sellingbags/Sellingbagss/web/Admin/Delete/DeleteProduct.jsp</file>
             <file>file:/C:/bt_java/sellingbags/Sellingbagss/web/Admin/LoginAdmin.jsp</file>
@@ -22,15 +24,24 @@
             <file>file:/C:/bt_java/sellingbags/Sellingbagss/web/WEB-INF/applicationContext.xml</file>
             <file>file:/C:/bt_java/sellingbags/Sellingbagss/src/java/model/Brandmodel/Brand.java</file>
             <file>file:/C:/bt_java/sellingbags/Sellingbagss/web/Admin/HomeAdmin.jsp</file>
+            <file>file:/C:/bt_java/sellingbags/Sellingbagss/web/Admin/Update/UpdateStatus.jsp</file>
+            <file>file:/C:/bt_java/sellingbags/Sellingbagss/web/Admin/Table/Ordershow.jsp</file>
             <file>file:/C:/bt_java/sellingbags/Sellingbagss/src/java/model/ImgProductmodel/ImageDao.java</file>
+            <file>file:/C:/bt_java/sellingbags/Sellingbagss/web/Admin/Update/UpdateBrand.jsp</file>
             <file>file:/C:/bt_java/sellingbags/Sellingbagss/web/Admin/Insert/InsertBrand.jsp</file>
+            <file>file:/C:/bt_java/sellingbags/Sellingbagss/src/java/model/Ordermodel/OrderDao.java</file>
             <file>file:/C:/bt_java/sellingbags/Sellingbagss/web/WEB-INF/dispatcher-servlet.xml</file>
+            <file>file:/C:/bt_java/sellingbags/Sellingbagss/src/java/model/OrderDetailmodel/OrderDetail.java</file>
+            <file>file:/C:/bt_java/sellingbags/Sellingbagss/src/java/model/Ordermodel/Order.java</file>
             <file>file:/C:/bt_java/sellingbags/Sellingbagss/web/Admin/Table/TableProduct.jsp</file>
             <file>file:/C:/bt_java/sellingbags/Sellingbagss/web/Home/HomeDetails.jsp</file>
             <file>file:/C:/bt_java/sellingbags/Sellingbagss/web/Admin/Delete/DeleteBrand.jsp</file>
             <file>file:/C:/bt_java/sellingbags/Sellingbagss/src/java/model/Brandmodel/BrandDao.java</file>
+            <file>file:/C:/bt_java/sellingbags/Sellingbagss/web/Admin/Insert/InsertCategory.jsp</file>
+            <file>file:/C:/bt_java/sellingbags/Sellingbagss/web/Admin/Table/OrdersConfirmation.jsp</file>
             <file>file:/C:/bt_java/sellingbags/Sellingbagss/src/java/model/Categorymodel/CategoryDao.java</file>
             <file>file:/C:/bt_java/sellingbags/Sellingbagss/web/META-INF/context.xml</file>
+            <file>file:/C:/bt_java/sellingbags/Sellingbagss/web/Admin/Update/UpdateCategory.jsp</file>
             <file>file:/C:/bt_java/sellingbags/Sellingbagss/web/Admin/Delete/DeleteProductbr.jsp</file>
             <file>file:/C:/bt_java/sellingbags/Sellingbagss/src/java/model/Productmodel/ProductDao.java</file>
             <file>file:/C:/bt_java/sellingbags/Sellingbagss/web/Home/Home.jsp</file>

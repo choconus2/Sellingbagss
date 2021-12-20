@@ -36,7 +36,8 @@ public class User {
         this.status = status;
     }
 
-    public User(String UserName, String Password, String Email, String status) {
+    public User(Integer Userid,String UserName, String Password, String Email, String status) {
+        this.Userid = Userid;
         this.UserName = UserName;
         this.Password = Password;
         this.Email = Email;

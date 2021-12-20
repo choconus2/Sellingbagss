@@ -192,7 +192,10 @@
                     String passwords = request.getParameter("psw");
                     if (email.equals(us.getEmail()) && passwords.equals(us.getPassword())) {
                         String UserName = us.getUserName();
+                        String UserId = us.getUserid().toString();
+                        session.setAttribute("userid", UserId);
                         session.setAttribute("username", UserName);
+                        
                         response.sendRedirect("Home.jsp?Page=1");
                         kt = true;
                     } else {

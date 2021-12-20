@@ -34,11 +34,12 @@ public class UserDao {
                     ResultSet rs = stmt.executeQuery("SELECT * FROM user ");) {
 
                 while (rs.next()) {
+                    Integer Userid=rs.getInt("Userid");
                     String UserName=rs.getString("UserName");
                     String Email=rs.getString("Email");
                     String Password=rs.getString("Password");
                     String status=rs.getString("status");                                      
-                    User pr=new User(UserName, Password, Email, status);
+                    User pr=new User(Userid,UserName, Password, Email, status);
                     Users.add(pr);
                 }           
             } catch (Exception e) {

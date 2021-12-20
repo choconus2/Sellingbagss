@@ -194,7 +194,7 @@
                     String Email = request.getParameter("email");
                     String Phone = request.getParameter("phone");
                     String Address = request.getParameter("address");
-                    db.SignupUser(new User(UserName, Password, Email, null));
+                    db.SignupUser(new User(0,UserName, Password, Email, Phone,Address));
                     response.sendRedirect("LoginUser.jsp");
 //                }
             }

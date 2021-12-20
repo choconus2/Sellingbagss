@@ -1,12 +1,11 @@
 <%-- 
-    Document   : HomeAdmin
-    Created on : Nov 11, 2021, 9:59:57 PM
+    Document   : UpdateCategory
+    Created on : Dec 13, 2021, 11:06:34 AM
     Author     : hieun
 --%>
 
+<%@page import="model.Categorymodel.*"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
-
-
 <!DOCTYPE html>
 <html lang="en">
     <head>
@@ -19,16 +18,16 @@
         <title>Startmin - Bootstrap Admin Theme</title>
 
         <!-- Bootstrap Core CSS -->
-        <link href="css/bootstrap.min.css" rel="stylesheet">
-
+        <link href="../css/bootstrap.min.css" rel="stylesheet">
+    
         <!-- MetisMenu CSS -->
-        <link href="css/metisMenu.min.css" rel="stylesheet">
+        <link href="../css/metisMenu.min.css" rel="stylesheet">
 
         <!-- Custom CSS -->
-        <link href="css/startmin.css" rel="stylesheet">
+        <link href="../css/startmin.css" rel="stylesheet">
 
         <!-- Custom Fonts -->
-        <link href="css/font-awesome.min.css" rel="stylesheet" type="text/css">
+        <link href="../css/font-awesome.min.css" rel="stylesheet" type="text/css">
 
         <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
         <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -39,8 +38,8 @@
     </head>
     <body>
         <%
-            if(session.getAttribute("adminName")==null){
-                response.sendRedirect("../Admin/LoginAdmin.jsp");        
+            if (session.getAttribute("adminName") == null) {
+                response.sendRedirect("http://localhost:8080/sellingbags/Admin/LoginAdmin.jsp");
             }
         %>
         <div id="wrapper">
@@ -63,7 +62,7 @@
                 </ul>
 
                 <ul class="nav navbar-right navbar-top-links">
-                    
+
                     <li class="dropdown">
                         <a class="dropdown-toggle" data-toggle="dropdown" href="#">
                             <i class="fa fa-user fa-fw"></i>Hello: <%out.println(session.getAttribute("adminName"));%><b class="caret"></b>
@@ -74,7 +73,7 @@
                             <li><a href="#"><i class="fa fa-gear fa-fw"></i> Settings</a>
                             </li>
                             <li class="divider"></li>
-                            <li><a href="../Admin/LogoutAdmin.jsp"><i class="fa fa-sign-out fa-fw"></i> Logout</a>
+                            <li><a href="../../Admin/LogoutAdmin.jsp"><i class="fa fa-sign-out fa-fw"></i> Logout</a>
                             </li>
                         </ul>
                     </li>
@@ -102,19 +101,13 @@
                                 <a href="#"><i class="fa fa-table"></i> Table<span class="fa arrow"></span></a>
                                 <ul class="nav nav-second-level">
                                     <li>
-                                        <a href="../Admin/Table/TableProduct.jsp?Page=1">Table Product</a>
+                                        <a href="../../Admin/Table/TableProduct.jsp?Page=1">Table Product</a>
                                     </li>
                                     <li>
-                                        <a href="../Admin/Table/TableBrand.jsp?Page=1">Table Brand</a>
+                                        <a href="../../Admin/Table/TableBrand.jsp?Page=1">Table Brand</a>
                                     </li>
                                     <li>
-                                        <a href="../Admin/Table/TableCategory.jsp?Page=1">Table Category</a>
-                                    </li>
-                                    <li>
-                                        <a href="../Admin/Table/OrdersConfirmation.jsp?Page=1">Orders are waiting for confirmation</a>
-                                    </li>
-                                    <li>
-                                        <a href="../Admin/Table/BeingTransported.jsp?Page=1">Being Transported</a>
+                                        <a href="../../Admin/Table/TableCategory.jsp?Page=1">Table Brand</a>
                                     </li>
                                 </ul>
                                 <!-- /.nav-second-level -->
@@ -131,8 +124,50 @@
                 <div class="container-fluid">
                     <div class="row">
                         <div class="col-lg-12">
-                            <h1 class="page-header">Blank</h1>
+                            <h1 class="page-header">Table Brand</h1>
+                        </div>
+                        <!-- /.col-lg-12 -->
+                    </div>
+                    <div class="row">
+                        <div class="col-lg-12">
                             
+                            <form <% out.print("action='UpdateCategory.jsp?Categoryid="+request.getParameter("Categoryid")+"'"); %> method="POST">
+                                <div class="form-group">
+                                    <label for="CategoryName">Category Name</label>
+                                    <input type="text" class="form-control" name="CategoryName" placeholder="Category Name">
+                                    <%
+                                        CategoryDao dbs = new CategoryDao();
+                                        int ktbr=0;
+                                        if(request.getParameter("add")!=null){
+                                            out.print(request.getParameter("CategoryName"));
+                                            if(request.getParameter("CategoryName").equals("")){
+                                                ktbr=1;
+                                            }else{
+                                                String CategoryName = request.getParameter("CategoryName");
+                                                
+                                                out.print(request.getParameter("Categoryid"));
+                                                dbs.UpdateCategory(new Category(Integer.parseInt(request.getParameter("Categoryid")),CategoryName)); 
+                                                response.sendRedirect("../../Admin/Table/TableCategory.jsp?Page=1");
+                                            }
+                                        }
+                                    %>
+                                    <small id="emailHelp" class="form-text text-muted">
+                                        <% 
+                                            if(ktbr==1){
+                                                out.print("<p style='color: red'>cannot be left blank<p>");
+                                            } 
+                                        
+                                        %>
+                                    
+                                    </small>
+                                </div>
+                                                             
+                                <input class="btn btn-primary" type="submit" name="add" value="Add"/>
+                               
+                            </form>
+
+
+                            <!-- /.panel -->
                         </div>
                         <!-- /.col-lg-12 -->
                     </div>
@@ -146,18 +181,16 @@
         <!-- /#wrapper -->
 
         <!-- jQuery -->
-        <script src="js/jquery.min.js"></script>
+        <script src="../js/jquery.min.js"></script>
 
         <!-- Bootstrap Core JavaScript -->
-        <script src="js/bootstrap.min.js"></script>
+        <script src="../js/bootstrap.min.js"></script>
 
         <!-- Metis Menu Plugin JavaScript -->
-        <script src="js/metisMenu.min.js"></script>
+        <script src="../js/metisMenu.min.js"></script>
 
         <!-- Custom Theme JavaScript -->
-        <script src="js/startmin.js"></script>
+        <script src="../js/startmin.js"></script>
 
     </body>
 </html>
-
-

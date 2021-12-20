@@ -1,13 +1,12 @@
 <%-- 
-    Document   : TableProduct
-    Created on : Nov 12, 2021, 8:58:09 PM
+    Document   : Ordershow
+    Created on : Dec 20, 2021, 5:09:58 PM
     Author     : hieun
 --%>
 
 <%@page import="model.ImgProductmodel.*"%>
-<%@page import="model.Productmodel.*"%>
 <%@page import="java.util.ArrayList"%>
-<%@page import="Database.Dbcontext"%>
+<%@page import="model.OrderDetailmodel.*"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html lang="en">
@@ -153,10 +152,7 @@
                         <div class="col-lg-12">
                             <div class="panel panel-default">
                                 <div class="panel-heading">
-                                    <a class="btn icon-btn btn-success" href="../../Admin/Insert/InsertProduct.jsp">
-                                        <span class="glyphicon btn-glyphicon glyphicon-plus img-circle text-success"></span>
-                                        New Product
-                                    </a>
+                                    
                                 </div>
                                 <!-- /.panel-heading -->
                                 <div class="panel-body">
@@ -176,37 +172,32 @@
                                                     <table class="table table-striped table-bordered table-hover dataTable no-footer" id="dataTables-example" role="grid" aria-describedby="dataTables-example_info">
                                                         <thead>
                                                             <tr role="row">
+                                                                <th>Image</th>
                                                                 <th>Product Name</th>
+                                                                <th>Quantity</th>
+                                                               
                                                                 <th>Price</th>
-                                                                <th>Img</th>
-                                                                <th>Detail</th>
-                                                                <th>Brand Name</th>
-                                                                <th>Category Name</th>
-
                                                             </tr>
                                                         </thead>
                                                         <tbody>
                                                             <%
-                                                                ProductDao db = new ProductDao();
                                                                 ImageDao im = new ImageDao();
+                                                                OrderDetailDao odd = new OrderDetailDao();
                                                                 //out.println(db.sayHello());
                                                                 String x = request.getParameter("Page");
-                                                                ArrayList<Product> Products = db.GetProduct((Integer.parseInt(x) - 1) * 6);
-                                                                for (Product br : Products) {
+                                                                ArrayList<OrderDetail> OrderDetails = odd.ShowOderDetail(Integer.parseInt(request.getParameter("orderId")));
+                                                                for (OrderDetail br : OrderDetails) {
                                                                     out.print("<tr class='gradeX odd' role='row'>");
-                                                                    out.print("<td>" + br.getProductName() + "</td>");
-                                                                    out.print("<td>" + br.getPrice() + "</td>");
                                                                     ArrayList<Image> Images = im.GetImage(br.getProductid());
-                                                                    out.print("<td>");
                                                                     for (Image imss : Images) {
-                                                                        out.println("<image style='width: 100px;height: 100px' src='../../img/ImageProduct/"+ imss.getImage() + "' />");
+                                                                        out.print("<td>" + "<img style='width: 100px;height: 100px' src='../../img/ImageProduct/" + imss.getImage() + "'>" + "</td>");                                                               
                                                                         break;
                                                                     }
-                                                                    out.print("</td>");
-                                                                    out.print("<td>" + br.getDetail() + "</td>");
-                                                                    out.print("<td>" + br.getBrandName()+ "</td>");
-                                                                    out.print("<td>" + br.getCategoryName()+ "</td>");
-                                                                    out.print("<td><a href='../Delete/DeleteProduct.jsp?Productid=" + br.getProductid()+ "'>Delete</a></td> ");
+                                                                    out.print("<td>" + br.getProductName()+ "</td>");
+                                                                    out.print("<td>" + br.getQuantity()+ "</td>");
+                                                                   
+                                                                    out.print("<td>" + br.getPrice()*br.getQuantity()+ "</td>");
+                                                                    out.print("<td><a href='../../Admin/Update/UpdateStatus.jsp?orderdetailId=" +br.getOrderdetailId()+ "'>Delete</a></td> ");
                                                                     out.print("</tr>");
                                                                 }
                                                             %>
@@ -221,32 +212,32 @@
                                                         <ul class="pagination">
 
                                                             <%
-                                                                int dem = 0;
-
-                                                                ArrayList<Product> countbr = db.CountProduct();
-                                                                int tongso = countbr.size();
-                                                                double a = (double) tongso / 6;
-                                                                int sotrang = (int) Math.ceil(a);
-                                                                String listpage = " ";
-                                                                for (int i = 1; i <= sotrang; i++) {
-                                                                    if (i == Integer.parseInt(x)) {
-                                                                        dem = i;
-                                                                        listpage += "<li class='paginate_button active'><a href='TableProduct.jsp?Page=" + i + "'>" + i + "</a></li>";
-                                                                    } else {
-                                                                        listpage += "<li><a href='TableProduct.jsp?Page=" + i + "'>" + i + "</a></li>";
-                                                                    }
-
-                                                                }
-                                                                int dem2 = dem + 1;
-                                                                int dem3 = dem - 1;
-                                                                if (dem > 1) {
-                                                                    out.print("<li ><a href='TableProduct.jsp?Page=" + dem3 + "'>Previous</a></li>");
-                                                                }
-
-                                                                out.print(listpage);
-                                                                if (dem < sotrang) {
-                                                                    out.print("<li ><a href='TableProduct.jsp?Page=" + dem2 + "'>Next</a></li>");
-                                                                }
+//                                                                int dem = 0;
+//
+//                                                                ArrayList<Category> countbr = db.CountCategory();
+//                                                                int tongso = countbr.size();
+//                                                                double a = (double) tongso / 6;
+//                                                                int sotrang = (int) Math.ceil(a);
+//                                                                String listpage = " ";
+//                                                                for (int i = 1; i <= sotrang; i++) {
+//                                                                    if (i == Integer.parseInt(x)) {
+//                                                                        dem = i;
+//                                                                        listpage += "<li class='paginate_button active'><a href='TableCategory.jsp?Page=" + i + "'>" + i + "</a></li>";
+//                                                                    } else {
+//                                                                        listpage += "<li><a href='TableCategory.jsp?Page=" + i + "'>" + i + "</a></li>";
+//                                                                    }
+//
+//                                                                }
+//                                                                int dem2 = dem + 1;
+//                                                                int dem3 = dem - 1;
+//                                                                if (dem > 1) {
+//                                                                    out.print("<li ><a href='TableCategory.jsp?Page=" + dem3 + "'>Previous</a></li>");
+//                                                                }
+//
+//                                                                out.print(listpage);
+//                                                                if (dem < sotrang) {
+//                                                                    out.print("<li ><a href='TableCategory.jsp?Page=" + dem2 + "'>Next</a></li>");
+//                                                                }
 
                                                             %>
 
