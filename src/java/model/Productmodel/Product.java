@@ -39,6 +39,15 @@ public class Product {
         this.Brandid = Brandid;
         this.Categoryid = Categoryid;
     }
+    
+    public Product(Integer Productid,String ProductName, Float Price, String Detail, Integer Brandid, Integer Categoryid) {
+        this.ProductName = ProductName;
+        this.Price = Price;
+        this.Detail = Detail;
+        this.Brandid = Brandid;
+        this.Categoryid = Categoryid;
+        this.Productid = Productid;
+    }
 
     public Product(Integer Productid) {
         this.Productid = Productid;

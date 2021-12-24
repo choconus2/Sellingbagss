@@ -1,6 +1,6 @@
 <%-- 
-    Document   : ShoppingCard
-    Created on : Dec 5, 2021, 9:41:13 AM
+    Document   : OrderHistory
+    Created on : Dec 23, 2021, 3:14:45 PM
     Author     : hieun
 --%>
 
@@ -66,8 +66,8 @@
             }
             .card {
                 margin: auto;
-                max-width: 950px;
-                width: 90%;
+               
+                width: 80%;
                 box-shadow: 0 6px 20px 0 rgba(0, 0, 0, 0.19);
                 border-radius: 1rem;
                 border: transparent
@@ -81,6 +81,7 @@
 
             .cart {
                 background-color: #fff;
+                width: 100%;
                 padding: 4vh 5vh;
                 border-bottom-left-radius: 1rem;
                 border-top-left-radius: 1rem
@@ -347,7 +348,7 @@
                     <div class="row">
                         <div class="col-xl-12">
                             <div class="hero-cap text-center">
-                                <h2>Shopping Cart</h2>
+                                <h2>Order History</h2>
                             </div>
                         </div>
                     </div>
@@ -356,12 +357,10 @@
         </div>
         <div class="product_image_area">
             <div class="card">
-                <div class="row">
-                    <div class="col-md-8 cart">
-                        <div class="title">
+                <div class="title">
                             <div class="row">
                                 <div class="col">
-                                    <h4><b>Shopping Cart</b></h4>
+                                    <h4><b>Order History</b></h4>
                                 </div>
                                 <div class="col align-self-center text-right text-muted">3 items</div>
                             </div>
@@ -373,7 +372,7 @@
                             float prices=0;
                             //out.println(db.sayHello());
                             String x = (String) session.getAttribute("userid");
-                            ArrayList<OrderDetail> OrderDetails = db.GetOderDetail(Integer.parseInt(x));
+                            ArrayList<OrderDetail> OrderDetails = db.GetOderDetailHistory(Integer.parseInt(x));
                             for (OrderDetail br : OrderDetails) {
                                 out.print("<div class='row border-top border-bottom'>");
                                 out.print("<div class='row main align-items-center'>");
@@ -389,38 +388,15 @@
                                 out.print("<div class='row text-muted'>Shirt</div>");
                                 out.print("<div class='row'>"+br.getProductName()+"</div>");
                                 out.print("</div>");
-                                out.print("<div class='col'> <button><b>-</b></button><a class='border'>"+br.getQuantity()+"</a><button><b>+</b></button> </div>");
-                                out.print("<div class='col'>&euro; "+br.getQuantity()*br.getPrice()+" <span class='close'>&#10005;</span></div>");
+                                out.print("<div class='col'><a class='border'>"+br.getQuantity()+"</a> </div>");
+                                out.print("<div class='col'>&euro; "+br.getQuantity()*br.getPrice()+" </div>");
+                                out.print("<div class='col'>"+db.GetNameStatus(br.getOrderId())+" </div>");
+                                
                                 out.print("</div>");
                                 out.print("</div>");
                                 prices+=br.getQuantity()*br.getPrice();
                             }
                         %>
-
-
-
-
-                    </div>
-                    <div class="col-md-4 summary">
-                        
-                        <form action="ShoppingCard.jsp" method="POST">
-                            
-                            <div class="row" style="border-top: 1px solid rgba(0,0,0,.1); padding: 2vh 0;">
-                            <div class="col">TOTAL PRICE</div>
-                            <div class="col text-right"><% out.print(prices); %></div>
-                            </div><input name="add" class="btn" type="submit" value="CHECK OUT" >
-                        </form>
-                        <%
-                            OrderDao or=new OrderDao();
-                            if(request.getParameter("add")!=null){
-                                out.print(orderId);                         
-                                or.UpdateOrders(new Order(orderId, 7));    
-                                response.sendRedirect("ShoppingCard.jsp");
-                            }
-                        
-                        %>
-                    </div>
-                </div>
             </div>
         </div>
         <!--================End Single Product Area =================-->

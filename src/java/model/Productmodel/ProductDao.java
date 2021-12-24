@@ -56,6 +56,82 @@ public class ProductDao {
 
         
     }
+    
+    public ArrayList<Product> GetProductbr(int x,String br){
+        
+        ArrayList<Product> Products=new ArrayList<Product>();
+        try {
+            Class.forName("com.mysql.jdbc.Driver");
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(Dbcontext.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        try (
+                    
+                    Connection connection = Dbcontext.getConnection();
+                    Statement stmt = connection.createStatement();
+                    ResultSet rs = stmt.executeQuery("SELECT * FROM product INNER JOIN Brand ON Product.Brandid = Brand.Brandid INNER JOIN category ON Product.Categoryid = category.Categoryid WHERE BrandName='"+br+"' ORDER BY Productid DESC  LIMIT "+x+",6");) {
+
+                while (rs.next()) {
+                    Integer Productid=rs.getInt("Productid");
+                    String ProductName=rs.getString("ProductName");
+                    Float Price=rs.getFloat("Price");
+                    String Detail=rs.getString("Detail");
+                    Integer Brandid=rs.getInt("Brandid");
+                    Integer Categoryid=rs.getInt("Categoryid");
+                    String BrandName=rs.getString("BrandName");
+                    String CategoryName=rs.getString("CategoryName");
+                    
+                    
+                    Product pr=new Product(Productid, ProductName, Price, Detail,Brandid,BrandName,Categoryid,CategoryName);
+                    Products.add(pr);
+                }           
+            } catch (Exception e) {
+               
+                System.err.println(e.getMessage());
+            } finally{
+                    return Products;
+                }
+
+        
+    }
+    public ArrayList<Product> GetProductcg(int x,String cg){
+        
+        ArrayList<Product> Products=new ArrayList<Product>();
+        try {
+            Class.forName("com.mysql.jdbc.Driver");
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(Dbcontext.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        try (
+                    
+                    Connection connection = Dbcontext.getConnection();
+                    Statement stmt = connection.createStatement();
+                    ResultSet rs = stmt.executeQuery("SELECT * FROM product INNER JOIN Brand ON Product.Brandid = Brand.Brandid INNER JOIN category ON Product.Categoryid = category.Categoryid WHERE CategoryName='"+cg+"' ORDER BY Productid DESC  LIMIT "+x+",6");) {
+
+                while (rs.next()) {
+                    Integer Productid=rs.getInt("Productid");
+                    String ProductName=rs.getString("ProductName");
+                    Float Price=rs.getFloat("Price");
+                    String Detail=rs.getString("Detail");
+                    Integer Brandid=rs.getInt("Brandid");
+                    Integer Categoryid=rs.getInt("Categoryid");
+                    String BrandName=rs.getString("BrandName");
+                    String CategoryName=rs.getString("CategoryName");
+                    
+                    
+                    Product pr=new Product(Productid, ProductName, Price, Detail,Brandid,BrandName,Categoryid,CategoryName);
+                    Products.add(pr);
+                }           
+            } catch (Exception e) {
+               
+                System.err.println(e.getMessage());
+            } finally{
+                    return Products;
+                }
+
+        
+    }
+    
     public ArrayList<Product> CountProduct(){
         
         ArrayList<Product> Products=new ArrayList<Product>();
@@ -69,6 +145,121 @@ public class ProductDao {
                     Connection connection = Dbcontext.getConnection();
                     Statement stmt = connection.createStatement();
                     ResultSet rs = stmt.executeQuery("SELECT * FROM product INNER JOIN Brand ON Product.Brandid = Brand.Brandid INNER JOIN category ON Product.Categoryid = category.Categoryid");) {
+
+                while (rs.next()) {
+                    Integer Productid=rs.getInt("Productid");
+                    String ProductName=rs.getString("ProductName");
+                    Float Price=rs.getFloat("Price");
+                    String Detail=rs.getString("Detail");
+                    Integer Brandid=rs.getInt("Brandid");
+                    Integer Categoryid=rs.getInt("Categoryid");
+                    String BrandName=rs.getString("BrandName");
+                    String CategoryName=rs.getString("CategoryName");
+                    
+                    
+                    Product pr=new Product(Productid, ProductName, Price, Detail,Brandid,BrandName,Categoryid,CategoryName);
+                    Products.add(pr);
+                }           
+            } catch (Exception e) {
+               
+                System.err.println(e.getMessage());
+            } finally{
+                    return Products;
+                }
+
+        
+    }
+    
+    public ArrayList<Product> GetProduct2(int x){
+        
+        ArrayList<Product> Products=new ArrayList<Product>();
+        try {
+            Class.forName("com.mysql.jdbc.Driver");
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(Dbcontext.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        try (
+                    
+                    Connection connection = Dbcontext.getConnection();
+                    Statement stmt = connection.createStatement();
+                    ResultSet rs = stmt.executeQuery("SELECT * FROM product INNER JOIN Brand ON Product.Brandid = Brand.Brandid INNER JOIN category ON Product.Categoryid = category.Categoryid WHERE Productid="+x);) {
+
+                while (rs.next()) {
+                    Integer Productid=rs.getInt("Productid");
+                    String ProductName=rs.getString("ProductName");
+                    Float Price=rs.getFloat("Price");
+                    String Detail=rs.getString("Detail");
+                    Integer Brandid=rs.getInt("Brandid");
+                    Integer Categoryid=rs.getInt("Categoryid");
+                    String BrandName=rs.getString("BrandName");
+                    String CategoryName=rs.getString("CategoryName");
+                    
+                    
+                    Product pr=new Product(Productid, ProductName, Price, Detail,Brandid,BrandName,Categoryid,CategoryName);
+                    Products.add(pr);
+                }           
+            } catch (Exception e) {
+               
+                System.err.println(e.getMessage());
+            } finally{
+                    return Products;
+                }
+
+        
+    }
+    
+    
+    public ArrayList<Product> CountProductbr(String br){
+        
+        ArrayList<Product> Products=new ArrayList<Product>();
+        try {
+            Class.forName("com.mysql.jdbc.Driver");
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(Dbcontext.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        try (
+                    
+                    Connection connection = Dbcontext.getConnection();
+                    Statement stmt = connection.createStatement();
+                    ResultSet rs = stmt.executeQuery("SELECT * FROM product INNER JOIN Brand ON Product.Brandid = Brand.Brandid INNER JOIN category ON Product.Categoryid = category.Categoryid WHERE BrandName='"+br+"'");) {
+
+                while (rs.next()) {
+                    Integer Productid=rs.getInt("Productid");
+                    String ProductName=rs.getString("ProductName");
+                    Float Price=rs.getFloat("Price");
+                    String Detail=rs.getString("Detail");
+                    Integer Brandid=rs.getInt("Brandid");
+                    Integer Categoryid=rs.getInt("Categoryid");
+                    String BrandName=rs.getString("BrandName");
+                    String CategoryName=rs.getString("CategoryName");
+                    
+                    
+                    Product pr=new Product(Productid, ProductName, Price, Detail,Brandid,BrandName,Categoryid,CategoryName);
+                    Products.add(pr);
+                }           
+            } catch (Exception e) {
+               
+                System.err.println(e.getMessage());
+            } finally{
+                    return Products;
+                }
+
+        
+    }
+    
+    public ArrayList<Product> CountProductcg(String br){
+        
+        ArrayList<Product> Products=new ArrayList<Product>();
+        try {
+            Class.forName("com.mysql.jdbc.Driver");
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(Dbcontext.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        try (
+                    
+                    Connection connection = Dbcontext.getConnection();
+                    Statement stmt = connection.createStatement();
+                    ResultSet rs = stmt.executeQuery("SELECT * FROM product INNER JOIN Brand ON Product.Brandid = Brand.Brandid INNER JOIN category ON Product.Categoryid = category.Categoryid WHERE CategoryName='"+br+"'");) {
 
                 while (rs.next()) {
                     Integer Productid=rs.getInt("Productid");
@@ -268,5 +459,23 @@ public class ProductDao {
                 }
 
         
+    }
+    
+    public void UpdateProduct(Product Products) {        
+        try {   
+            Dbcontext.getConnection();            
+            String sql = "UPDATE product SET ProductName=?,Price=?,Detail=?,Brandid=?,Categoryid=? WHERE Productid=?";
+            PreparedStatement  statement = (PreparedStatement) Dbcontext.getConnection().prepareStatement(sql);           
+            statement.setString(1, Products.getProductName());
+            statement.setFloat(2, Products.getPrice());
+            statement.setString(3, Products.getDetail());
+            statement.setInt(4, Products.getBrandid());
+            statement.setInt(5, Products.getCategoryid());
+            statement.setInt(6, Products.getProductid());
+            statement.executeUpdate();                        
+            System.out.println("Update data successfully");
+        } catch(SQLException ex) {
+            System.err.println("Error in SQL: "+ex.toString());
+        }                
     }
 }

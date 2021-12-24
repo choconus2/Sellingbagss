@@ -4,6 +4,8 @@
     Author     : hieun
 --%>
 
+<%@page import="model.Categorymodel.*"%>
+<%@page import="model.Brandmodel.*"%>
 <%@page import="java.util.ArrayList"%>
 <%@page import="model.Productmodel.*"%>
 <%@page import="model.ImgProductmodel.*"%>
@@ -78,98 +80,49 @@
                                     <div class="main-menu f-right d-none d-lg-block">
                                         <nav>
                                             <ul id="navigation">
-                                                <li><a href="index.php">Home</a></li>
+                                                <li><a href="Home.jsp?Page=1">Home</a></li>
 
 
                                                 <li class="nav-item dropdown has-megamenu">
                                                     <a class="nav-link dropdown-toggle" href="#">Category</a>
                                                     <ul class="submenu" id="ul1">
-                                                        <li>
-                                                            <a href="homedanhmuc.php?gender=Woman">
-                                                                <h4 class="title" align="center">Women</h4>
-                                                            </a>
-                                                        </li>
-                                                        <li><a href="homedanhmuc2.php?idproducttype=9"
-                                                               align="center">Handbags Woman</a>
-                                                        </li>
-                                                        <li><a href="homedanhmuc2.php?idproducttype=10"
-                                                               align="center">Shoulder bags Woman</a>
-                                                        </li>
-                                                        <li><a href="homedanhmuc2.php?idproducttype=11"
-                                                               align="center">Crossbody bags Woman</a>
-                                                        </li>
-                                                        <li><a href="homedanhmuc2.php?idproducttype=12"
-                                                               align="center">Clutches Woman</a>
-                                                        </li>
-                                                        <li><a href="homedanhmuc2.php?idproducttype=13"
-                                                               align="center">Backpacks Woman</a>
-                                                        </li>
-                                                        <li><a href="homedanhmuc2.php?idproducttype=14"
-                                                               align="center">Briefcases Woman</a>
-                                                        </li>
-                                                        <li><a href="homedanhmuc2.php?idproducttype=15"
-                                                               align="center">Tote bags Woman</a>
-                                                        </li>
-                                                        <li><a href="homedanhmuc2.php?idproducttype=16"
-                                                               align="center">Pouches Woman</a>
-                                                        </li>
+                                                        
+                                                        <%
+                                                            CategoryDao cgd = new CategoryDao();
+                                                            //out.println(db.sayHello());
+
+                                                            ArrayList<Category> Categorys = cgd.CountCategory();
+                                                            for (Category br : Categorys) {
+                                                                out.print("<li>");
+                                                                out.print("<a href='HomeCategory.jsp?Page=1&CategoryName="+br.getCategoryName()+"' >"+br.getCategoryName()+"</a>");
+                                                                out.print("</li>");
+                                                                
+                                                            }
+
+                                                        %>
 
                                                     </ul>
-                                                    <ul class="submenu" id="ul2">
-                                                        <li>
-                                                            <a href="homedanhmuc.php?gender=Men">
-                                                                <h4 class="title" align="center">Men</h4>
-                                                            </a>
-                                                        </li>
-                                                        <li><a href="homedanhmuc2.php?idproducttype=1"
-                                                               align="center">Handbags Men</a>
-                                                        </li>
-                                                        <li><a href="homedanhmuc2.php?idproducttype=2"
-                                                               align="center">Shoulder bags Men</a>
-                                                        </li>
-                                                        <li><a href="homedanhmuc2.php?idproducttype=3"
-                                                               align="center">Crossbody bags Men</a>
-                                                        </li>
-                                                        <li><a href="homedanhmuc2.php?idproducttype=4"
-                                                               align="center">Clutches Men</a>
-                                                        </li>
-                                                        <li><a href="homedanhmuc2.php?idproducttype=5"
-                                                               align="center">Backpacks Men</a>
-                                                        </li>
-                                                        <li><a href="homedanhmuc2.php?idproducttype=6"
-                                                               align="center">Briefcases Men</a>
-                                                        </li>
-                                                        <li><a href="homedanhmuc2.php?idproducttype=7"
-                                                               align="center">Tote bags Men</a>
-                                                        </li>
-                                                        <li><a href="homedanhmuc2.php?idproducttype=8"
-                                                               align="center">Pouches Men</a>
-                                                        </li>
-                                                    </ul>
+                                                    
                                                 </li>
 
 
                                                 <li class="hot">
                                                     <a href="#">Top Brand</a>
                                                     <ul class="submenu">
-                                                        <li><a
-                                                                href="homesanpham.php?idBrand=1">Hermès</a>
-                                                        </li>
-                                                        <li><a
-                                                                href="homesanpham.php?idBrand=2">Louis Vuitton</a>
-                                                        </li>
-                                                        <li><a
-                                                                href="homesanpham.php?idBrand=4">Prada</a>
-                                                        </li>
-                                                        <li><a
-                                                                href="homesanpham.php?idBrand=5">Charles & Keith</a>
-                                                        </li>
-                                                        <li><a
-                                                                href="homesanpham.php?idBrand=6">Dolce & Gabbana</a>
-                                                        </li>
-                                                        <li><a
-                                                                href="homesanpham.php?idBrand=7">Prada</a>
-                                                        </li>
+                                                        <%
+                                                            BrandDao dbs = new BrandDao();
+                                                            //out.println(db.sayHello());
+
+                                                            ArrayList<Brand> Brands = dbs.CountBrand();
+                                                            for (Brand br : Brands) {
+                                                                out.print("<li>");
+                                                                out.print("<a href='HomeBrand.jsp?Page=1&BrandName="+br.getBrandName()+"' >"+br.getBrandName()+"</a>");
+                                                                out.print("</li>");
+                                                                
+                                                            }
+
+                                                        %>
+                                                        
                                                     </ul>
 
                                                 </li>

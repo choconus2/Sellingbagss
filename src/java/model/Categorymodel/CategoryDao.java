@@ -82,6 +82,38 @@ public class CategoryDao {
         
     }
     
+    public ArrayList<Category> GetCategory2(int x){
+        
+        ArrayList<Category> Categorys=new ArrayList<Category>();
+        try {
+            Class.forName("com.mysql.jdbc.Driver");
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(Dbcontext.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        try (
+                    
+                    Connection connection = Dbcontext.getConnection();
+                    Statement stmt = connection.createStatement();
+                    ResultSet rs = stmt.executeQuery("SELECT * FROM category WHERE Categoryid="+x);) {
+
+                while (rs.next()) {
+                    Integer Categoryid=rs.getInt("Categoryid");
+                    String CategoryName=rs.getString("CategoryName");
+                    
+                    
+                    Category pr=new Category(Categoryid,CategoryName);
+                    Categorys.add(pr);
+                }           
+            } catch (Exception e) {
+               
+                System.err.println(e.getMessage());
+            } finally{
+                    return Categorys;
+                }
+
+        
+    }
+    
     public void InsertCategory(Category Categorys) {        
         try {   
             Dbcontext.getConnection();            

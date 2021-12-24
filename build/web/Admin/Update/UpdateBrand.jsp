@@ -4,6 +4,7 @@
     Author     : hieun
 --%>
 
+<%@page import="java.util.ArrayList"%>
 <%@page import="model.Brandmodel.Brand"%>
 <%@page import="model.Brandmodel.BrandDao"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
@@ -20,7 +21,7 @@
 
         <!-- Bootstrap Core CSS -->
         <link href="../css/bootstrap.min.css" rel="stylesheet">
-    
+
         <!-- MetisMenu CSS -->
         <link href="../css/metisMenu.min.css" rel="stylesheet">
 
@@ -131,41 +132,55 @@
                     </div>
                     <div class="row">
                         <div class="col-lg-12">
-                            <form action="InsertBrand.jsp" method="POST">
+                            <%
+                                String BrandNames="";
+                                String Logos="";
+                                BrandDao db = new BrandDao();
+                                ArrayList<Brand> Brands = db.GetBrand2(Integer.parseInt(request.getParameter("Brandid")));
+                                for (Brand br : Brands) {
+                                    BrandNames = br.getBrandName();
+                                    Logos = br.getLogo();
+                                }
+                            %>
+                            <form <% out.print("action='UpdateBrand.jsp?Brandid=" + request.getParameter("Brandid") + "'"); %> method="POST">
                                 <div class="form-group">
                                     <label for="brandName">Brand Name</label>
-                                    <input type="text" class="form-control" name="brandName" placeholder="Brand Name">
+                                    <input type="text" class="form-control" name="brandName" placeholder="Brand Name" <% out.print("value='"+BrandNames+"'"); %>>
                                     <%
-                                        BrandDao db = new BrandDao();
-                                        int ktbr=0;
-                                        if(request.getParameter("add")!=null){
+
+                                        int ktbr = 0;
+                                        if (request.getParameter("add") != null) {
                                             out.print(request.getParameter("brandName"));
-                                            if(request.getParameter("brandName").equals("")){
-                                                ktbr=1;
-                                            }else{
+                                            if (request.getParameter("brandName").equals("")) {
+                                                ktbr = 1;
+                                            } else {
                                                 String brandName = request.getParameter("brandName");
                                                 String logo = request.getParameter("logo");
-                                                db.InsertBrand(new Brand(0,brandName, logo)); 
+                                                if(!logo.isEmpty()){
+                                                    logo=request.getParameter("logo2");
+                                                }
+                                                db.UpdateBrand(new Brand(Integer.parseInt(request.getParameter("Brandid")), brandName, logo));
                                                 response.sendRedirect("../../Admin/Table/TableBrand.jsp?Page=1");
                                             }
                                         }
                                     %>
                                     <small id="emailHelp" class="form-text text-muted">
-                                        <% 
-                                            if(ktbr==1){
+                                        <%
+                                            if (ktbr == 1) {
                                                 out.print("<p style='color: red'>cannot be left blank<p>");
-                                            } 
-                                        
+                                            }
+
                                         %>
-                                    
+
                                     </small>
                                 </div>
                                 <div class="form-group">
                                     <label for="logo">Logo</label>
                                     <input type="file"  name="logo">
+                                    <input type="hidden" name="logo2" <% out.print("value='"+Logos+"'"); %>/>
                                 </div>                               
                                 <input class="btn btn-primary" type="submit" name="add" value="Add"/>
-                               
+
                             </form>
 
 

@@ -1,9 +1,8 @@
 <%-- 
-    Document   : Home
-    Created on : Nov 24, 2021, 8:57:20 PM
+    Document   : HomeBrand
+    Created on : Dec 22, 2021, 8:34:15 PM
     Author     : hieun
 --%>
-
 <%@page import="model.Categorymodel.*"%>
 <%@page import="model.Brandmodel.*"%>
 <%@page import="java.util.ArrayList"%>
@@ -275,7 +274,7 @@
                                     ImageDao im = new ImageDao();
                                     //out.println(db.sayHello());
                                     String x = request.getParameter("Page");
-                                    ArrayList<Product> Products = db.GetProduct((Integer.parseInt(x) - 1) * 6);
+                                    ArrayList<Product> Products = db.GetProductbr((Integer.parseInt(x) - 1) * 6,request.getParameter("BrandName"));
                                     for (Product br : Products) {
                                         out.print("<a href='HomeDetails.jsp?Productid=" + br.getProductid() + "' >");
                                         out.print("<div class='col-xl-4 col-lg-4 col-md-6'>");
@@ -308,7 +307,7 @@
                             <%
                                 int dem = 0;
 
-                                ArrayList<Product> countbr = db.CountProduct();
+                                ArrayList<Product> countbr = db.CountProductbr(request.getParameter("BrandName"));
                                 int tongso = countbr.size();
                                 double a = (double) tongso / 6;
                                 int sotrang = (int) Math.ceil(a);
@@ -316,21 +315,21 @@
                                 for (int i = 1; i <= sotrang; i++) {
                                     if (i == Integer.parseInt(x)) {
                                         dem = i;
-                                        listpage += "<li class='page-item active'><a class='page-link' href='Home.jsp?Page=" + i + "'>" + i + "</a></li>";
+                                        listpage += "<li class='page-item active'><a class='page-link' href='HomeBrand.jsp?Page=" + i + "&BrandName="+request.getParameter("BrandName")+"'>" + i + "</a></li>";
                                     } else {
-                                        listpage += "<li><a class='page-link' href='Home.jsp?Page=" + i + "'>" + i + "</a></li>";
+                                        listpage += "<li><a class='page-link' href='HomeBrand.jsp?Page=" + i + "&BrandName="+request.getParameter("BrandName")+"'>" + i + "</a></li>";
                                     }
 
                                 }
                                 int dem2 = dem + 1;
                                 int dem3 = dem - 1;
                                 if (dem > 1) {
-                                    out.print("<li ><a class='page-link' href='Home.jsp?Page=" + dem3 + "'>Previous</a></li>");
+                                    out.print("<li ><a class='page-link' href='HomeBrand.jsp?Page=" + dem3 + "&BrandName="+request.getParameter("BrandName")+"'>"+"Previous</a></li>");
                                 }
 
                                 out.print(listpage);
                                 if (dem < sotrang) {
-                                    out.print("<li ><a class='page-link' href='Home.jsp?Page=" + dem2 + "'>Next</a></li>");
+                                    out.print("<li ><a class='page-link' href='HomeBrand.jsp?Page=" + dem2 + "&BrandName="+request.getParameter("BrandName")+"'>"+"Next</a></li>");
                                 }
 
                             %>

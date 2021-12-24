@@ -1,12 +1,14 @@
 <%-- 
-    Document   : UpdateBrand
-    Created on : Dec 13, 2021, 11:03:36 AM
+    Document   : UpdateProduct
+    Created on : Dec 24, 2021, 1:24:52 PM
     Author     : hieun
 --%>
 
+<%@page import="model.ImgProductmodel.*"%>
+<%@page import="model.Productmodel.*"%>
+<%@page import="model.Categorymodel.*"%>
 <%@page import="java.util.ArrayList"%>
-<%@page import="model.Brandmodel.Brand"%>
-<%@page import="model.Brandmodel.BrandDao"%>
+<%@page import="model.Brandmodel.*"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html lang="en">
@@ -130,57 +132,127 @@
                         </div>
                         <!-- /.col-lg-12 -->
                     </div>
+                    <%
+                        String ProductNames = "";
+                        float Prices = 0;
+                        String Details ="";
+                        Integer Brandids = 0;
+                        Integer Categoryids = 0;
+                        ProductDao pd = new ProductDao();
+                        ImageDao imd = new ImageDao();
+                        ArrayList<Product> Products = pd.GetProduct2(Integer.parseInt(request.getParameter("Productid")));
+                        for (Product br : Products) {
+                            ProductNames=br.getProductName();
+                            Prices=br.getPrice();
+                            Details=br.getDetail();
+                            Brandids=br.getBrandid();
+                            Categoryids=br.getCategoryid();
+                        }
+                    %>
                     <div class="row">
                         <div class="col-lg-12">
                             <%
-                                String BrandNames="";
-                                String Logos="";
-                                BrandDao db = new BrandDao();
-                                ArrayList<Brand> Brands = db.GetBrand2(Integer.parseInt(request.getParameter("Brandid")));
-                                for (Brand br : Brands) {
-                                    BrandNames = br.getBrandName();
-                                    Logos = br.getLogo();
+                                int ktbr = 0;
+                                if (request.getParameter("add") != null) {
+//                                            if(request.getParameter("brandName").equals("")){
+//                                                ktbr=1;
+//                                            }else{
+                                    String ProductName = request.getParameter("ProductName");
+                                    Float Price = Float.parseFloat(request.getParameter("Price"));
+                                    String Detail = request.getParameter("Detail");
+                                    Integer Brandid = Integer.parseInt(request.getParameter("Brandid"));
+                                    Integer Categoryid = Integer.parseInt(request.getParameter("Categoryid"));
+                                    pd.UpdateProduct(new Product(Integer.parseInt(request.getParameter("Productid")), ProductName, Price, Detail, Brandid, Categoryid));
+
+                                    String[] Image = request.getParameterValues("Image");
+                                    if(!Image[0].isEmpty()){
+                                        imd.deleteImage(Integer.parseInt(request.getParameter("Productid")));
+                                        for (int i = 0; i < Image.length; i++) {
+                                        imd.InsertImage(new Image(Image[i], pd.GetIdProduct(ProductName)));
+                                        }
+                                    }
+                                    
+                                    response.sendRedirect("../../Admin/Table/TableProduct.jsp?Page=1");
+//                                            }
                                 }
                             %>
-                            <form <% out.print("action='UpdateBrand.jsp?Brandid=" + request.getParameter("Brandid") + "'"); %> method="POST">
+                            <form <% out.print("action='UpdateProduct.jsp?Productid=" + request.getParameter("Productid") + "'"); %> method="POST">
                                 <div class="form-group">
-                                    <label for="brandName">Brand Name</label>
-                                    <input type="text" class="form-control" name="brandName" placeholder="Brand Name" <% out.print("value='"+BrandNames+"'"); %>>
-                                    <%
+                                    <label for="ProductName">Product Name</label>
+                                    <input type="text" class="form-control" name="ProductName" placeholder="Product Name" <% out.print("value='" + ProductNames + "'"); %>>
 
-                                        int ktbr = 0;
-                                        if (request.getParameter("add") != null) {
-                                            out.print(request.getParameter("brandName"));
-                                            if (request.getParameter("brandName").equals("")) {
-                                                ktbr = 1;
-                                            } else {
-                                                String brandName = request.getParameter("brandName");
-                                                String logo = request.getParameter("logo");
-                                                if(!logo.isEmpty()){
-                                                    logo=request.getParameter("logo2");
-                                                }
-                                                db.UpdateBrand(new Brand(Integer.parseInt(request.getParameter("Brandid")), brandName, logo));
-                                                response.sendRedirect("../../Admin/Table/TableBrand.jsp?Page=1");
-                                            }
-                                        }
-                                    %>
                                     <small id="emailHelp" class="form-text text-muted">
                                         <%
-                                            if (ktbr == 1) {
-                                                out.print("<p style='color: red'>cannot be left blank<p>");
-                                            }
+//                                            if(ktbr==1){
+//                                                out.print("<p style='color: red'>cannot be left blank<p>");
+//                                            } 
 
                                         %>
 
                                     </small>
                                 </div>
                                 <div class="form-group">
-                                    <label for="logo">Logo</label>
-                                    <input type="file"  name="logo">
-                                    <input type="hidden" name="logo2" <% out.print("value='"+Logos+"'"); %>/>
-                                </div>                               
-                                <input class="btn btn-primary" type="submit" name="add" value="Add"/>
+                                    <label for="Price">Price</label>
+                                    <input type="text" class="form-control" name="Price" placeholder="Price" <% out.print("value='" + Prices + "'"); %>>
 
+                                    <small id="emailHelp" class="form-text text-muted">                                      
+                                    </small>
+                                </div>   
+                                <div class="form-group">
+                                    <label for="Detail">Detail</label>
+                                    <input type="text" class="form-control" name="Detail" placeholder="Detail" <% out.print("value='" + Details + "'"); %>>
+
+                                    <small id="emailHelp" class="form-text text-muted">                                      
+                                    </small>
+                                </div>          
+                                <div class="form-group">
+                                    <label for="Image">Image</label>
+                                    <input type='file' name='Image' multiple />
+                                </div>                               
+
+
+                                <div class="form-group">
+                                    <label for="BrandName">Brand Name</label>
+
+                                    <select name="Brandid" id="cars">
+                                        <%                                            BrandDao br = new BrandDao();
+                                            //out.println(db.sayHello());
+                                            ArrayList<Brand> Brands = br.CountBrand();
+                                            for (Brand brs : Brands) {
+                                                if(brs.getBrandid()==Brandids){
+                                                    out.print("<option selected value='" + brs.getBrandid() + "'>" + brs.getBrandName() + "</option>");
+                                                } else{
+                                                    out.print("<option value='" + brs.getBrandid() + "'>" + brs.getBrandName() + "</option>");
+                                                }
+                                                
+                                            }
+                                        %>
+
+                                    </select>
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="CategoryName">Category Name</label>
+
+                                    <select name="Categoryid" id="cars">
+                                        <%
+                                            CategoryDao ct = new CategoryDao();
+                                            //out.println(db.sayHello());
+                                            ArrayList<Category> Categorys = ct.CountCategory();
+                                            for (Category cts : Categorys) {
+                                                if(cts.getCategoryid()==Categoryids){
+                                                    out.print("<option selected value='" + cts.getCategoryid() + "'>" + cts.getCategoryName() + "</option>");
+                                                }else{
+                                                    out.print("<option value='" + cts.getCategoryid() + "'>" + cts.getCategoryName() + "</option>");
+                                                }
+                                                
+                                            }
+                                        %>
+
+                                    </select>
+                                </div>     
+
+                                <input class="btn btn-primary" type="submit" name="add" value="Add"/>        
                             </form>
 
 

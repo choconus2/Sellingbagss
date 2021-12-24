@@ -4,6 +4,8 @@
     Author     : hieun
 --%>
 
+<%@page import="model.Categorymodel.*"%>
+<%@page import="model.Brandmodel.*"%>
 <%@page import="model.Ordermodel.*"%>
 <%@page import="model.ImgProductmodel.*"%>
 <%@page import="java.util.ArrayList"%>
@@ -249,60 +251,48 @@
                                     <div class="main-menu f-right d-none d-lg-block">
                                         <nav>
                                             <ul id="navigation">
-                                                <li><a href="index.php">Home</a></li>
+                                                <li><a href="Home.jsp?Page=1">Home</a></li>
 
 
                                                 <li class="nav-item dropdown has-megamenu">
                                                     <a class="nav-link dropdown-toggle" href="#">Category</a>
                                                     <ul class="submenu" id="ul1">
-                                                        <li>
-                                                            <a href="homedanhmuc.php?gender=Woman">
-                                                                <h4 class="title" align="center">Women</h4>
-                                                            </a>
-                                                        </li>
-                                                        <?php  
-                                                        $Tea = in_danhmucnu();
-                                                        $count = mysqli_num_rows($Tea);
-                                                        for ($i = 0; $i < $count; $i++):
-                                                        $ProductType = mysqli_fetch_assoc($Tea); 
-                                                        $IdProductType = mysqli_insert_id($db);
-                                                        ?>
-                                                        <li><a href="<?php echo "homedanhmuc2.php?idproducttype=".$ProductType['idproducttype'];?>"
-                                                               align="center"><?php echo $ProductType["producttypeName"]?></a>
-                                                        </li>
-                                                        <?php 
-                                                        endfor; 
-                                                        mysqli_free_result($Tea);
-                                                        ?>
+                                                        
+                                                        <%
+                                                            CategoryDao cgd = new CategoryDao();
+                                                            //out.println(db.sayHello());
+
+                                                            ArrayList<Category> Categorys = cgd.CountCategory();
+                                                            for (Category br : Categorys) {
+                                                                out.print("<li>");
+                                                                out.print("<a href='HomeCategory.jsp?Page=1&CategoryName="+br.getCategoryName()+"' >"+br.getCategoryName()+"</a>");
+                                                                out.print("</li>");
+                                                                
+                                                            }
+
+                                                        %>
 
                                                     </ul>
-                                                    <ul class="submenu" id="ul2">
-                                                        <li>
-                                                            <a href="homedanhmuc.php?gender=Men">
-                                                                <h4 class="title" align="center">Men</h4>
-                                                            </a>
-                                                        </li>
-                                                        <?php  
-                                                        $Tea = in_danhmucnam();
-                                                        $count = mysqli_num_rows($Tea);
-                                                        for ($i = 0; $i < $count; $i++):
-                                                        $ProductType = mysqli_fetch_assoc($Tea); 
-                                                        $IdProductType = mysqli_insert_id($db);
-                                                        ?>
-                                                        <li><a href="<?php echo "homedanhmuc2.php?idproducttype=".$ProductType['idproducttype'];?>"
-                                                               align="center"><?php echo $ProductType["producttypeName"]?></a>
-                                                        </li>
-                                                        <?php 
-                                                        endfor; 
-                                                        mysqli_free_result($Tea);
-                                                        ?>
-                                                    </ul>
+                                                    
                                                 </li>
 
 
                                                 <li class="hot">
                                                     <a href="#">Top Brand</a>
                                                     <ul class="submenu">
+                                                        <%
+                                                            BrandDao dbs = new BrandDao();
+                                                            //out.println(db.sayHello());
+
+                                                            ArrayList<Brand> Brands = dbs.CountBrand();
+                                                            for (Brand br : Brands) {
+                                                                out.print("<li>");
+                                                                out.print("<a href='HomeBrand.jsp?Page=1&BrandName="+br.getBrandName()+"' >"+br.getBrandName()+"</a>");
+                                                                out.print("</li>");
+                                                                
+                                                            }
+
+                                                        %>
                                                         
                                                     </ul>
 
@@ -380,6 +370,7 @@
                             OrderDetailDao db = new OrderDetailDao();
                             ImageDao im = new ImageDao();
                             int orderId=0;
+                            float prices=0;
                             //out.println(db.sayHello());
                             String x = (String) session.getAttribute("userid");
                             ArrayList<OrderDetail> OrderDetails = db.GetOderDetail(Integer.parseInt(x));
@@ -402,6 +393,7 @@
                                 out.print("<div class='col'>&euro; "+br.getQuantity()*br.getPrice()+" <span class='close'>&#10005;</span></div>");
                                 out.print("</div>");
                                 out.print("</div>");
+                                prices+=br.getQuantity()*br.getPrice();
                             }
                         %>
 
@@ -410,22 +402,12 @@
 
                     </div>
                     <div class="col-md-4 summary">
-                        <div>
-                            <h5><b>Summary</b></h5>
-                        </div>
-                        <hr>
-                        <div class="row">
-                            <div class="col" style="padding-left:0;">ITEMS 3</div>
-                            <div class="col text-right">&euro; 132.00</div>
-                        </div>
+                        
                         <form action="ShoppingCard.jsp" method="POST">
-                            <p>SHIPPING</p> <select>
-                                <option class="text-muted">Standard-Delivery- &euro;5.00</option>
-                            </select>
-                            <p>GIVE CODE</p> <input id="code" placeholder="Enter your code">
+                            
                             <div class="row" style="border-top: 1px solid rgba(0,0,0,.1); padding: 2vh 0;">
                             <div class="col">TOTAL PRICE</div>
-                            <div class="col text-right">&euro; 137.00</div>
+                            <div class="col text-right"><% out.print(prices); %></div>
                             </div><input name="add" class="btn" type="submit" value="CHECK OUT" >
                         </form>
                         <%

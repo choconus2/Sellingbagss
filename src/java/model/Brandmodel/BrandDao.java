@@ -82,6 +82,37 @@ public class BrandDao {
         
     }
     
+    public ArrayList<Brand> GetBrand2(int x){
+        
+        ArrayList<Brand> Brands=new ArrayList<Brand>();
+        try {
+            Class.forName("com.mysql.jdbc.Driver");
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(Dbcontext.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        try (
+                    
+                    Connection connection = Dbcontext.getConnection();
+                    Statement stmt = connection.createStatement();
+                    ResultSet rs = stmt.executeQuery("SELECT * FROM brand WHERE Brandid="+x);) {
+
+                while (rs.next()) {
+                    Integer idBrand=rs.getInt("Brandid");
+                    String brandName=rs.getString("BrandName");
+                    String logo=rs.getString("Logo");                                     
+                    Brand pr=new Brand(idBrand,brandName,logo);
+                    Brands.add(pr);
+                }           
+            } catch (Exception e) {
+               
+                System.err.println(e.getMessage());
+            } finally{
+                    return Brands;
+                }
+
+        
+    }
+    
     public String NameBrand(int id){
         
         String namebr="";

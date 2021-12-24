@@ -72,6 +72,74 @@ public class OrderDetailDao {
         
     }
     
+    public ArrayList<OrderDetail> GetOderDetailHistory(int x){
+        String innpr ="INNER JOIN product ON orderdetail.Productid = product.Productid ";
+        String innod ="INNER JOIN `order` ON orderdetail.orderId = `order`.orderId ";
+        String innodst ="INNER JOIN status ON `order`.statusId = status.statusId ";
+        ArrayList<OrderDetail> OrderDetails=new ArrayList<OrderDetail>();
+        try {
+            Class.forName("com.mysql.jdbc.Driver");
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(Dbcontext.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        try (
+                    
+                    Connection connection = Dbcontext.getConnection();
+                    Statement stmt = connection.createStatement();
+                    ResultSet rs = stmt.executeQuery("SELECT * FROM orderdetail "+innpr+innod+"WHERE statusId>=7 AND Userid="+x);) {
+
+                while (rs.next()) {
+                    
+                    String ProductName=rs.getString("ProductName");
+                    Float Price=rs.getFloat("Price");
+                    Integer quantity=rs.getInt("quantity");
+                    Integer Productid=rs.getInt("Productid");
+                    Integer orderdetailId=rs.getInt("orderdetailId");
+                    Integer orderId=rs.getInt("orderId");
+                    
+                    OrderDetail pr=new OrderDetail(orderdetailId,quantity, Productid, ProductName, Price,orderId);
+                    OrderDetails.add(pr);
+                }           
+            } catch (Exception e) {
+               
+                System.err.println(e.getMessage());
+            } finally{
+                    return OrderDetails;
+                }
+
+        
+    }
+    
+    public String GetNameStatus(int x){
+        String status="";
+        try {
+            Class.forName("com.mysql.jdbc.Driver");
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(Dbcontext.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        try (
+                    
+                    Connection connection = Dbcontext.getConnection();
+                    Statement stmt = connection.createStatement();
+                    ResultSet rs = stmt.executeQuery("SELECT * FROM `order` INNER JOIN status ON `order`.statusId = status.statusId WHERE orderId="+x);) {
+
+                while (rs.next()) {
+                    
+                    String statusName=rs.getString("status");
+                    
+                    status=statusName;
+                }           
+            } catch (Exception e) {
+               
+                System.err.println(e.getMessage());
+            } finally{
+                    return status;
+                }
+
+        
+    }
+    
+    
     public ArrayList<OrderDetail> GetOderDetailcf(){
         String innpr ="INNER JOIN product ON orderdetail.Productid = product.Productid ";
         String innod ="INNER JOIN `order` ON orderdetail.orderId = `order`.orderId ";

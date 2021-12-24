@@ -4,6 +4,7 @@
     Author     : hieun
 --%>
 
+<%@page import="java.util.ArrayList"%>
 <%@page import="model.Categorymodel.*"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
@@ -19,7 +20,7 @@
 
         <!-- Bootstrap Core CSS -->
         <link href="../css/bootstrap.min.css" rel="stylesheet">
-    
+
         <!-- MetisMenu CSS -->
         <link href="../css/metisMenu.min.css" rel="stylesheet">
 
@@ -130,40 +131,48 @@
                     </div>
                     <div class="row">
                         <div class="col-lg-12">
-                            
-                            <form <% out.print("action='UpdateCategory.jsp?Categoryid="+request.getParameter("Categoryid")+"'"); %> method="POST">
+                            <%
+                                String CategoryNames="";
+                                CategoryDao dbs = new CategoryDao();
+                                ArrayList<Category> Categorys = dbs.GetCategory2(Integer.parseInt(request.getParameter("Categoryid")));
+                                for (Category br : Categorys) {
+                                    CategoryNames =br.getCategoryName();
+                                }
+
+                            %>
+                            <form <% out.print("action='UpdateCategory.jsp?Categoryid=" + request.getParameter("Categoryid") + "'"); %> method="POST">
                                 <div class="form-group">
                                     <label for="CategoryName">Category Name</label>
-                                    <input type="text" class="form-control" name="CategoryName" placeholder="Category Name">
+                                    <input type="text" class="form-control" name="CategoryName" placeholder="Category Name" <% out.print("value='" + CategoryNames + "'"); %>>
                                     <%
-                                        CategoryDao dbs = new CategoryDao();
-                                        int ktbr=0;
-                                        if(request.getParameter("add")!=null){
+
+                                        int ktbr = 0;
+                                        if (request.getParameter("add") != null) {
                                             out.print(request.getParameter("CategoryName"));
-                                            if(request.getParameter("CategoryName").equals("")){
-                                                ktbr=1;
-                                            }else{
+                                            if (request.getParameter("CategoryName").equals("")) {
+                                                ktbr = 1;
+                                            } else {
                                                 String CategoryName = request.getParameter("CategoryName");
-                                                
+
                                                 out.print(request.getParameter("Categoryid"));
-                                                dbs.UpdateCategory(new Category(Integer.parseInt(request.getParameter("Categoryid")),CategoryName)); 
+                                                dbs.UpdateCategory(new Category(Integer.parseInt(request.getParameter("Categoryid")), CategoryName));
                                                 response.sendRedirect("../../Admin/Table/TableCategory.jsp?Page=1");
                                             }
                                         }
                                     %>
                                     <small id="emailHelp" class="form-text text-muted">
-                                        <% 
-                                            if(ktbr==1){
+                                        <%
+                                            if (ktbr == 1) {
                                                 out.print("<p style='color: red'>cannot be left blank<p>");
-                                            } 
-                                        
+                                            }
+
                                         %>
-                                    
+
                                     </small>
                                 </div>
-                                                             
+
                                 <input class="btn btn-primary" type="submit" name="add" value="Add"/>
-                               
+
                             </form>
 
 

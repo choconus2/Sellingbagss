@@ -4,6 +4,8 @@
     Author     : hieun
 --%>
 
+<%@page import="model.Categorymodel.*"%>
+<%@page import="model.Brandmodel.*"%>
 <%@page import="model.OrderDetailmodel.*"%>
 <%@page import="java.util.Date"%>
 <%@page import="java.text.SimpleDateFormat"%>
@@ -106,74 +108,49 @@
                                     <div class="main-menu f-right d-none d-lg-block">
                                         <nav>
                                             <ul id="navigation">
-                                                <li><a href="index.php">Home</a></li>
+                                                <li><a href="Home.jsp?Page=1">Home</a></li>
 
 
                                                 <li class="nav-item dropdown has-megamenu">
                                                     <a class="nav-link dropdown-toggle" href="#">Category</a>
                                                     <ul class="submenu" id="ul1">
-                                                        <li>
-                                                            <a href="homedanhmuc.php?gender=Woman">
-                                                                <h4 class="title" align="center">Women</h4>
-                                                            </a>
-                                                        </li>
-                                                        <?php  
-                                                        $Tea = in_danhmucnu();
-                                                        $count = mysqli_num_rows($Tea);
-                                                        for ($i = 0; $i < $count; $i++):
-                                                        $ProductType = mysqli_fetch_assoc($Tea); 
-                                                        $IdProductType = mysqli_insert_id($db);
-                                                        ?>
-                                                        <li><a href="<?php echo "homedanhmuc2.php?idproducttype=".$ProductType['idproducttype'];?>"
-                                                               align="center"><?php echo $ProductType["producttypeName"]?></a>
-                                                        </li>
-                                                        <?php 
-                                                        endfor; 
-                                                        mysqli_free_result($Tea);
-                                                        ?>
+                                                        
+                                                        <%
+                                                            CategoryDao cgd = new CategoryDao();
+                                                            //out.println(db.sayHello());
+
+                                                            ArrayList<Category> Categorys = cgd.CountCategory();
+                                                            for (Category br : Categorys) {
+                                                                out.print("<li>");
+                                                                out.print("<a href='HomeCategory.jsp?Page=1&CategoryName="+br.getCategoryName()+"' >"+br.getCategoryName()+"</a>");
+                                                                out.print("</li>");
+                                                                
+                                                            }
+
+                                                        %>
 
                                                     </ul>
-                                                    <ul class="submenu" id="ul2">
-                                                        <li>
-                                                            <a href="homedanhmuc.php?gender=Men">
-                                                                <h4 class="title" align="center">Men</h4>
-                                                            </a>
-                                                        </li>
-                                                        <?php  
-                                                        $Tea = in_danhmucnam();
-                                                        $count = mysqli_num_rows($Tea);
-                                                        for ($i = 0; $i < $count; $i++):
-                                                        $ProductType = mysqli_fetch_assoc($Tea); 
-                                                        $IdProductType = mysqli_insert_id($db);
-                                                        ?>
-                                                        <li><a href="<?php echo "homedanhmuc2.php?idproducttype=".$ProductType['idproducttype'];?>"
-                                                               align="center"><?php echo $ProductType["producttypeName"]?></a>
-                                                        </li>
-                                                        <?php 
-                                                        endfor; 
-                                                        mysqli_free_result($Tea);
-                                                        ?>
-                                                    </ul>
+                                                    
                                                 </li>
 
 
                                                 <li class="hot">
                                                     <a href="#">Top Brand</a>
                                                     <ul class="submenu">
-                                                        <?php  
-                                                        $Tea = in_hang();
-                                                        $count = mysqli_num_rows($Tea);
-                                                        for ($i = 0; $i < $count; $i++):
-                                                        $ProductType = mysqli_fetch_assoc($Tea); 
-                                                        $IdProductType = mysqli_insert_id($db);
-                                                        ?>
-                                                        <li><a
-                                                                href="<?php echo "homesanpham.php?idBrand=".$ProductType['idBrand'];?>"><?php echo $ProductType['brandName']; ?></a>
-                                                        </li>
-                                                        <?php 
-                                                        endfor; 
-                                                        mysqli_free_result($Tea);
-                                                        ?>
+                                                        <%
+                                                            BrandDao dbs = new BrandDao();
+                                                            //out.println(db.sayHello());
+
+                                                            ArrayList<Brand> Brands = dbs.CountBrand();
+                                                            for (Brand br : Brands) {
+                                                                out.print("<li>");
+                                                                out.print("<a href='HomeBrand.jsp?Page=1&BrandName="+br.getBrandName()+"' >"+br.getBrandName()+"</a>");
+                                                                out.print("</li>");
+                                                                
+                                                            }
+
+                                                        %>
+                                                        
                                                     </ul>
 
                                                 </li>

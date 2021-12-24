@@ -10,6 +10,7 @@
             <file>file:/C:/bt_java/sellingbags/Sellingbagss/web/Home/ShoppingCard.jsp</file>
             <file>file:/C:/bt_java/sellingbags/Sellingbagss/web/redirect.jsp</file>
             <file>file:/C:/bt_java/sellingbags/Sellingbagss/web/Admin/Delete/DeleteProduct.jsp</file>
+            <file>file:/C:/bt_java/sellingbags/Sellingbagss/web/Admin/Table/BeingTransported.jsp</file>
             <file>file:/C:/bt_java/sellingbags/Sellingbagss/web/Admin/LoginAdmin.jsp</file>
             <file>file:/C:/bt_java/sellingbags/Sellingbagss/web/Admin/LogoutAdmin.jsp</file>
             <file>file:/C:/bt_java/sellingbags/Sellingbagss/nbproject/build-impl.xml</file>
@@ -41,6 +42,7 @@
             <file>file:/C:/bt_java/sellingbags/Sellingbagss/web/Admin/Table/OrdersConfirmation.jsp</file>
             <file>file:/C:/bt_java/sellingbags/Sellingbagss/src/java/model/Categorymodel/CategoryDao.java</file>
             <file>file:/C:/bt_java/sellingbags/Sellingbagss/web/META-INF/context.xml</file>
+            <file>file:/C:/bt_java/sellingbags/Sellingbagss/web/Home/HomeBrand.jsp</file>
             <file>file:/C:/bt_java/sellingbags/Sellingbagss/web/Admin/Update/UpdateCategory.jsp</file>
             <file>file:/C:/bt_java/sellingbags/Sellingbagss/web/Admin/Delete/DeleteProductbr.jsp</file>
             <file>file:/C:/bt_java/sellingbags/Sellingbagss/src/java/model/Productmodel/ProductDao.java</file>
